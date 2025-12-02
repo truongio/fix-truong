@@ -441,7 +441,7 @@
     /* Bottom Controls */
     .bottom-controls {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       padding: 0 4px;
       flex-shrink: 0;
@@ -596,8 +596,38 @@
       }
     }
 
+    @keyframes slideOut {
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
     .fade-in {
       animation: fadeIn 0.3s ease;
+    }
+
+    .slide-out {
+      animation: slideOut 0.3s ease forwards;
+    }
+
+    .slide-in {
+      animation: slideIn 0.3s ease forwards;
     }
   </style>
 </head>
@@ -650,7 +680,6 @@
           <button class="done-btn" id="doneBtn">
             DONE <span class="checkmark">✓</span>
           </button>
-          <button class="nav-btn" id="nextBtn">›</button>
         </div>
       </div>
     </div>
@@ -1153,10 +1182,16 @@
       $('prevBtn').disabled = currentExercise === 0 && currentSide === 0 && currentRound === 1;
       $('backBtn').disabled = $('prevBtn').disabled;
 
-      // Animate
-      $('exerciseInfo').classList.remove('fade-in');
-      void $('exerciseInfo').offsetWidth;
-      $('exerciseInfo').classList.add('fade-in');
+      // Animate slide-in
+      const exerciseInfo = $('exerciseInfo');
+      exerciseInfo.classList.remove('fade-in', 'slide-out', 'slide-in');
+      void exerciseInfo.offsetWidth; // Force reflow
+      exerciseInfo.classList.add('slide-in');
+      
+      // Remove slide-in class after animation completes
+      setTimeout(() => {
+        exerciseInfo.classList.remove('slide-in');
+      }, 300);
     }
 
     function startTimer() {
@@ -1173,7 +1208,13 @@
         if (timeRemaining <= 0) {
           clearInterval(timerInterval);
           completionBeep();
-          advanceStep();
+          // Trigger slide-out animation before advancing
+          const exerciseInfo = $('exerciseInfo');
+          exerciseInfo.classList.remove('fade-in', 'slide-in');
+          exerciseInfo.classList.add('slide-out');
+          setTimeout(() => {
+            advanceStep();
+          }, 300);
         }
       }, 1000);
     }
@@ -1196,18 +1237,26 @@
 
     function handleDone() {
       const ex = exercises[currentExercise];
+      const exerciseInfo = $('exerciseInfo');
 
-      if (ex.type === 'timed') {
-        clearInterval(timerInterval);
-        advanceStep();
-      } else if (ex.type === 'manual') {
-        completionBeep();
-        advanceStep();
-      } else {
-        // Rep-based exercises: mark entire exercise as done
-        completionBeep();
-        advanceStep();
-      }
+      // Trigger slide-out animation
+      exerciseInfo.classList.remove('fade-in', 'slide-in');
+      exerciseInfo.classList.add('slide-out');
+
+      // Wait for animation to complete, then advance
+      setTimeout(() => {
+        if (ex.type === 'timed') {
+          clearInterval(timerInterval);
+          advanceStep();
+        } else if (ex.type === 'manual') {
+          completionBeep();
+          advanceStep();
+        } else {
+          // Rep-based exercises: mark entire exercise as done
+          completionBeep();
+          advanceStep();
+        }
+      }, 300); // Match animation duration
     }
 
     function goNext() {
@@ -1273,7 +1322,6 @@
     $('startBtn').addEventListener('click', startSession);
     $('restartBtn').addEventListener('click', startSession);
     $('doneBtn').addEventListener('click', handleDone);
-    $('nextBtn').addEventListener('click', goNext);
     $('prevBtn').addEventListener('click', goPrev);
     $('backBtn').addEventListener('click', goPrev);
     $('soundToggle').addEventListener('click', () => {
