@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Neck & Posture</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg: #000000;
+      --text: #ffffff;
+      --text-dim: #666666;
+      --accent: #f5c518;
+      --accent-orange: #ff6b35;
+      --success: #4ade80;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+    }
+
+    .app {
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Start Screen */
+    .start-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .start-screen h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .start-screen .subtitle {
+      color: var(--text-dim);
+      font-size: 1rem;
+      margin-bottom: 48px;
+    }
+
+    .start-btn {
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      padding: 16px 48px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .start-btn:active {
+      transform: scale(0.96);
+      opacity: 0.9;
+    }
+
+    /* Exercise Screen */
+    .exercise-screen {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+    }
+
+    .exercise-screen.active {
+      display: flex;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      flex-shrink: 0;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 8px;
+      margin: -8px;
+      opacity: 0.8;
+    }
+
+    .back-btn:disabled {
+      opacity: 0.3;
+    }
+
+    .header-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+    }
+
+    .header-timer {
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-dim);
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 24px 24px;
+    }
+
+    /* Exercise Info */
+    .exercise-info {
+      margin-bottom: 24px;
+    }
+
+    .exercise-name {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    /* Progress Dots */
+    .progress-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .dot {
+      width: 24px;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--text-dim);
+      opacity: 0.3;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      opacity: 1;
+    }
+
+    .dot.completed {
+      background: var(--text-dim);
+      opacity: 0.6;
+    }
+
+    /* Stats Display */
+    .stats {
+      display: flex;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .stat-value.yellow {
+      color: var(--accent);
+    }
+
+    .stat-value.orange {
+      color: var(--accent-orange);
+    }
+
+    .stat-value.small {
+      font-size: 2rem;
+    }
+
+    /* Side Indicator */
+    .side-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    /* Exercise Illustration */
+    .illustration {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 24px;
+      opacity: 0.6;
+    }
+
+    .illustration svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .illustration line,
+    .illustration circle,
+    .illustration path,
+    .illustration ellipse {
+      stroke: var(--text);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .illustration .head {
+      fill: none;
+    }
+
+    @keyframes breathe {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
+    }
+
+    @keyframes nod {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(6px);
+      }
+    }
+
+    @keyframes tilt {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(15deg);
+      }
+    }
+
+    @keyframes raise {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(-5deg);
+      }
+    }
+
+    @keyframes tuck {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-8px); }
+    }
+
+    @keyframes circle {
+      0% { transform: rotate(0deg) translateX(0) translateY(0); }
+      25% { transform: rotate(90deg) translateX(0) translateY(-10px); }
+      50% { transform: rotate(180deg) translateX(0) translateY(0); }
+      75% { transform: rotate(270deg) translateX(0) translateY(10px); }
+      100% { transform: rotate(360deg) translateX(0) translateY(0); }
+    }
+
+    @keyframes slide-up {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes slide-down {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(15px); }
+    }
+
+    @keyframes rotate-arms-up {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-45deg); }
+    }
+
+    @keyframes rotate-arms-down {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(45deg); }
+    }
+
+    @keyframes lift-head {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(-8deg); }
+    }
+
+    @keyframes step-forward {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(8px); }
+    }
+
+    @keyframes thread-arm {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      50% { transform: translateX(-15px) translateY(10px); }
+    }
+
+    @keyframes y-position {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(-30deg) translateY(-20px); }
+    }
+
+    @keyframes t-position {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(0deg) translateY(-15px); }
+    }
+
+    @keyframes w-position {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(15deg) translateY(-10px); }
+    }
+
+    .anim-breathe {
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+    .anim-nod {
+      animation: nod 2s ease-in-out infinite;
+    }
+
+    .anim-tilt {
+      animation: tilt 3s ease-in-out infinite;
+    }
+
+    .anim-raise {
+      animation: raise 2.5s ease-in-out infinite;
+    }
+
+    .anim-tuck {
+      animation: tuck 2s ease-in-out infinite;
+    }
+
+    .anim-circle {
+      animation: circle 4s ease-in-out infinite;
+    }
+
+    .anim-slide-up {
+      animation: slide-up 3s ease-in-out infinite;
+    }
+
+    .anim-slide-down {
+      animation: slide-down 3s ease-in-out infinite;
+    }
+
+    .anim-rotate-arms-up {
+      animation: rotate-arms-up 3s ease-in-out infinite;
+    }
+
+    .anim-rotate-arms-down {
+      animation: rotate-arms-down 3s ease-in-out infinite;
+    }
+
+    .anim-lift-head {
+      animation: lift-head 2s ease-in-out infinite;
+    }
+
+    .anim-step-forward {
+      animation: step-forward 2s ease-in-out infinite;
+    }
+
+    .anim-thread-arm {
+      animation: thread-arm 3s ease-in-out infinite;
+    }
+
+    .anim-y-position {
+      animation: y-position 2s ease-in-out infinite;
+    }
+
+    .anim-t-position {
+      animation: t-position 2s ease-in-out infinite;
+    }
+
+    .anim-w-position {
+      animation: w-position 2s ease-in-out infinite;
+    }
+
+    /* Instructions */
+    .instructions {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-bottom: 32px;
+      max-height: 80px;
+      overflow: hidden;
+    }
+
+    /* Bottom Controls */
+    .bottom-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--text);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(0.95);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+    }
+
+    .done-btn {
+      background: rgba(74, 222, 128, 0.15);
+      border: none;
+      color: var(--success);
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .done-btn:active {
+      background: rgba(74, 222, 128, 0.25);
+      transform: scale(0.96);
+    }
+
+    .done-btn .checkmark {
+      font-size: 1.1rem;
+    }
+
+    /* Completion Screen */
+    .completion-screen {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .completion-screen.active {
+      display: flex;
+    }
+
+    .completion-icon {
+      font-size: 4rem;
+      margin-bottom: 24px;
+    }
+
+    .completion-screen h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .completion-screen p {
+      color: var(--text-dim);
+      margin-bottom: 48px;
+    }
+
+    .completion-stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .completion-stat {
+      text-align: center;
+    }
+
+    .completion-stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .completion-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .restart-btn {
+      background: transparent;
+      border: 1px solid var(--text-dim);
+      color: var(--text);
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .restart-btn:active {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Sound Toggle */
+    .sound-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0.5;
+      z-index: 100;
+    }
+
+    /* Hidden */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <button class="sound-toggle" id="soundToggle">🔔</button>
+
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+      <h1>Neck & Posture</h1>
+      <p class="subtitle">15-20 min · 10 exercises</p>
+      <button class="start-btn" id="startBtn">START</button>
+    </div>
+
+    <!-- Exercise Screen -->
+    <div class="exercise-screen" id="exerciseScreen">
+      <div class="header">
+        <button class="back-btn" id="backBtn">‹</button>
+        <span class="header-title" id="headerTitle">RELEASE & MOBILIZE</span>
+        <span class="header-timer" id="sessionTimer">0:00</span>
+      </div>
+
+      <div class="main-content">
+        <div class="exercise-info fade-in" id="exerciseInfo">
+          <div class="illustration" id="illustration"></div>
+          <div class="side-label hidden" id="sideLabel">LEFT SIDE</div>
+          <h1 class="exercise-name" id="exerciseName">Chin Tucks</h1>
+
+          <div class="progress-dots" id="progressDots"></div>
+
+          <div class="stats" id="stats">
+            <div class="stat">
+              <span class="stat-label">REPS</span>
+              <span class="stat-value yellow" id="primaryStat">10</span>
+            </div>
+            <div class="stat" id="secondaryStat">
+              <span class="stat-label">HOLD</span>
+              <span class="stat-value orange" id="secondaryValue">5s</span>
+            </div>
+          </div>
+
+          <p class="instructions" id="instructions">
+            Gently draw your chin straight back, creating a "double chin." Hold 5 seconds.
+          </p>
+        </div>
+
+        <div class="bottom-controls">
+          <button class="nav-btn" id="prevBtn">‹</button>
+          <button class="done-btn" id="doneBtn">
+            DONE <span class="checkmark">✓</span>
+          </button>
+          <button class="nav-btn" id="nextBtn">›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div class="completion-screen" id="completionScreen">
+      <div class="completion-icon">✓</div>
+      <h2>Session Complete</h2>
+      <p>Great work on your posture!</p>
+      <div class="completion-stats">
+        <div class="completion-stat">
+          <div class="completion-stat-value" id="finalTime">15:00</div>
+          <div class="completion-stat-label">DURATION</div>
+        </div>
+        <div class="completion-stat">
+          <div class="completion-stat-value">10</div>
+          <div class="completion-stat-label">EXERCISES</div>
+        </div>
+      </div>
+      <button class="restart-btn" id="restartBtn">START AGAIN</button>
+    </div>
+  </div>
+
+  <script>
+    // SVG illustrations for each exercise
+    const illustrations = {
+      chinTucks: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-back" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Side view of head and neck -->
+        <g>
+          <!-- Neck -->
+          <line x1="50" y1="50" x2="50" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <!-- Head profile -->
+          <g class="anim-tuck" style="transform-origin: 50px 50px">
+            <path d="M50 30 Q 45 25 40 30 Q 38 35 40 40 Q 42 45 50 50" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- Chin -->
+            <path d="M40 40 Q 42 42 45 40" stroke="white" stroke-width="2"/>
+            <!-- Nose -->
+            <line x1="50" y1="35" x2="55" y2="38" stroke="white" stroke-width="2"/>
+          </g>
+          <!-- Arrow showing movement -->
+          <path d="M35 40 L45 40" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-back)"/>
+          <!-- Shoulders -->
+          <line x1="50" y1="75" x2="35" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="75" x2="65" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        </g>
+      </svg>`,
+
+      neckCircles: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-circle-nc" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Body -->
+        <line x1="50" y1="55" x2="50" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <line x1="50" y1="80" x2="30" y2="90" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <line x1="50" y1="80" x2="70" y2="90" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <!-- Head with circular motion -->
+        <g class="anim-circle" style="transform-origin: 50px 40px">
+          <circle cx="50" cy="40" r="12" stroke="white" stroke-width="3" fill="none"/>
+          <!-- Eyes -->
+          <circle cx="45" cy="38" r="1.5" fill="white"/>
+          <circle cx="55" cy="38" r="1.5" fill="white"/>
+        </g>
+        <!-- Circular path indicator -->
+        <path d="M30 40 A 20 20 0 1 1 70 40" stroke="#f5c518" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.6" marker-end="url(#arrow-circle-nc)"/>
+        <path d="M70 40 A 20 20 0 1 1 30 40" stroke="#f5c518" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.3"/>
+      </svg>`,
+
+      upperTrap: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-ut" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Body sitting -->
+        <line x1="50" y1="60" x2="50" y2="85" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <path d="M50 85 Q 40 90 30 85" stroke="white" stroke-width="3" fill="none"/>
+        <!-- Hand sitting on -->
+        <path d="M30 85 L25 90 L35 90 Z" fill="white" opacity="0.5"/>
+        <!-- Free arm -->
+        <g class="anim-tilt" style="transform-origin: 50px 60px">
+          <line x1="50" y1="60" x2="50" y2="50" stroke="white" stroke-width="3"/>
+          <!-- Head tilted -->
+          <circle cx="50" cy="35" r="12" stroke="white" stroke-width="3" fill="none"/>
+          <!-- Hand applying pressure -->
+          <path d="M65 35 Q 60 30 55 32" stroke="#f5c518" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="55" cy="32" r="3" fill="#f5c518" opacity="0.7"/>
+        </g>
+        <!-- Arrow showing tilt direction -->
+        <path d="M65 45 L70 50" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ut)"/>
+      </svg>`,
+
+      levatorScap: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-ls" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Body sitting -->
+        <line x1="50" y1="60" x2="50" y2="85" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <path d="M50 85 Q 40 90 30 85" stroke="white" stroke-width="3" fill="none"/>
+        <!-- Hand sitting on -->
+        <path d="M30 85 L25 90 L35 90 Z" fill="white" opacity="0.5"/>
+        <!-- Head turned and tilted -->
+        <g class="anim-tilt" style="transform-origin: 50px 60px">
+          <line x1="50" y1="60" x2="50" y2="50" stroke="white" stroke-width="3"/>
+          <!-- Head rotated and tilted -->
+          <g transform="rotate(20 50 35)">
+            <circle cx="50" cy="35" r="12" stroke="white" stroke-width="3" fill="none"/>
+            <!-- Nose pointing toward armpit -->
+            <path d="M50 35 L58 40" stroke="white" stroke-width="2"/>
+            <!-- Hand applying pressure -->
+            <path d="M65 30 Q 60 25 55 28" stroke="#f5c518" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="55" cy="28" r="3" fill="#f5c518" opacity="0.7"/>
+          </g>
+        </g>
+        <!-- Arrow showing look direction -->
+        <path d="M60 50 L70 60" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ls)"/>
+      </svg>`,
+
+      doorwayPec: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-dp" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Doorframe -->
+        <line x1="75" y1="10" x2="75" y2="90" stroke="#666" stroke-width="4" opacity="0.4"/>
+        <!-- Person side view -->
+        <g class="anim-step-forward">
+          <!-- Body -->
+          <line x1="50" y1="50" x2="50" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <!-- Head -->
+          <circle cx="50" cy="35" r="10" stroke="white" stroke-width="3" fill="none"/>
+          <!-- Legs -->
+          <line x1="50" y1="80" x2="40" y2="90" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="80" x2="60" y2="90" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <!-- Arm against wall -->
+          <path d="M50 50 L75 40 L75 60" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Forearm at 90 degrees -->
+          <path d="M50 50 L50 45 L45 48" stroke="white" stroke-width="2"/>
+        </g>
+        <!-- Arrow showing step forward -->
+        <path d="M40 65 L50 65" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-dp)"/>
+      </svg>`,
+
+      threadNeedle: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-tn" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Floor -->
+        <line x1="10" y1="85" x2="90" y2="85" stroke="#666" stroke-width="2" opacity="0.4"/>
+        <!-- Body on hands and knees -->
+        <circle cx="40" cy="55" r="8" stroke="white" stroke-width="3" fill="none"/>
+        <!-- Spine -->
+        <line x1="40" y1="63" x2="40" y2="75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <!-- Supporting arm -->
+        <line x1="40" y1="75" x2="30" y2="85" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <!-- Supporting leg -->
+        <line x1="40" y1="75" x2="50" y2="85" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <!-- Threading arm -->
+        <g class="anim-thread-arm" style="transform-origin: 40px 75px">
+          <path d="M40 75 L20 85 L15 90" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Shoulder and head resting -->
+          <circle cx="15" cy="90" r="4" fill="white" opacity="0.6"/>
+        </g>
+        <!-- Arrow showing threading motion -->
+        <path d="M35 80 L25 85" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-tn)"/>
+      </svg>`,
+
+      chinTuckNod: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-ctn" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Floor -->
+        <line x1="10" y1="85" x2="90" y2="85" stroke="#666" stroke-width="2" opacity="0.4"/>
+        <!-- Body lying down -->
+        <line x1="20" y1="80" x2="70" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <!-- Head lifting -->
+        <g class="anim-lift-head" style="transform-origin: 20px 80px">
+          <circle cx="20" cy="75" r="10" stroke="white" stroke-width="3" fill="none"/>
+          <!-- Chin tucked -->
+          <path d="M20 75 Q 18 73 16 75" stroke="white" stroke-width="2"/>
+          <!-- Arrow showing lift -->
+          <path d="M20 65 L20 55" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ctn)"/>
+        </g>
+        <!-- Text indicator -->
+        <text x="50" y="95" font-size="8" fill="#666" text-anchor="middle">1-2cm LIFT</text>
+      </svg>`,
+
+      ytwRaises: `<svg viewBox="0 0 100 100">
+        <!-- Floor -->
+        <line x1="10" y1="90" x2="90" y2="90" stroke="#666" stroke-width="2" opacity="0.4"/>
+        <!-- Body lying face down (top view) -->
+        <ellipse cx="50" cy="85" rx="15" ry="5" stroke="white" stroke-width="2" fill="none"/>
+        <!-- Head (top view) -->
+        <circle cx="50" cy="75" r="6" stroke="white" stroke-width="2" fill="none"/>
+        <!-- Y Position -->
+        <g class="anim-y-position" style="transform-origin: 50px 80px">
+          <path d="M50 80 L30 50" stroke="#f5c518" stroke-width="3" stroke-linecap="round"/>
+          <path d="M50 80 L70 50" stroke="#f5c518" stroke-width="3" stroke-linecap="round"/>
+          <text x="50" y="45" font-size="14" fill="#f5c518" text-anchor="middle" font-weight="bold">Y</text>
+        </g>
+        <!-- T Position (ghosted) -->
+        <g opacity="0.3">
+          <path d="M50 80 L20 80" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M50 80 L80 80" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <text x="50" y="78" font-size="12" fill="white" text-anchor="middle">T</text>
+        </g>
+        <!-- W Position (ghosted) -->
+        <g opacity="0.3">
+          <path d="M50 80 L35 70 L25 65" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M50 80 L65 70 L75 65" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <text x="50" y="68" font-size="12" fill="white" text-anchor="middle">W</text>
+        </g>
+      </svg>`,
+
+      wallAngels: `<svg viewBox="0 0 100 100">
+        <defs>
+          <marker id="arrow-wa" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          </marker>
+        </defs>
+        <!-- Wall -->
+        <rect x="5" y="5" width="90" height="90" fill="none" stroke="#666" stroke-width="2" stroke-dasharray="4,4" opacity="0.3"/>
+        <!-- Body against wall -->
+        <line x1="50" y1="50" x2="50" y2="85" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <!-- Head -->
+        <circle cx="50" cy="35" r="10" stroke="white" stroke-width="3" fill="none"/>
+        <!-- Arms in goal post position -->
+        <g class="anim-slide-up" style="transform-origin: 50px 50px">
+          <!-- Left arm -->
+          <path d="M50 50 L30 50 L30 30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Right arm -->
+          <path d="M50 50 L70 50 L70 30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <!-- Arrows showing up/down motion -->
+        <path d="M75 40 L75 60" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-wa)"/>
+        <path d="M25 60 L25 40" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-wa)"/>
+      </svg>`,
+
+      restPosition: `<svg viewBox="0 0 100 100">
+        <!-- Floor -->
+        <line x1="10" y1="85" x2="90" y2="85" stroke="#666" stroke-width="2" opacity="0.4"/>
+        <!-- Towel under neck -->
+        <path d="M55 85 Q 55 80 65 80 Q 75 80 75 85" fill="#f5c518" opacity="0.3"/>
+        <!-- Body lying flat -->
+        <line x1="20" y1="82" x2="70" y2="82" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <!-- Head on towel -->
+        <g class="anim-breathe" style="transform-origin: 65px 75px">
+          <circle cx="65" cy="75" r="10" stroke="white" stroke-width="3" fill="none"/>
+          <!-- Relaxed face -->
+          <path d="M62 73 Q 65 75 68 73" stroke="white" stroke-width="1.5" fill="none"/>
+        </g>
+        <!-- Arms at sides, palms up -->
+        <path d="M20 82 Q 15 80 15 85" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M70 82 Q 75 80 75 85" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+        <!-- Breathing indicator -->
+        <path d="M50 75 Q 50 70 50 75" stroke="#f5c518" stroke-width="1" fill="none" opacity="0.5" class="anim-breathe"/>
+      </svg>`
+    };
+
+    // Exercise data
+    const exercises = [
+      {
+        name: "Chin Tucks",
+        part: "RELEASE & MOBILIZE",
+        instructions: "Draw your chin straight back, creating a \"double chin.\" Hold 5 seconds.",
+        type: "manual",
+        reps: 10,
+        hold: 5,
+        sides: 1,
+        illustration: "chinTucks"
+      },
+      {
+        name: "Neck Circles",
+        part: "RELEASE & MOBILIZE",
+        instructions: "Let your head drop forward, slowly roll ear to shoulder, back, other shoulder, forward.",
+        type: "reps",
+        reps: 5,
+        sides: 2,
+        sideNames: ["CLOCKWISE", "COUNTER-CLOCKWISE"],
+        illustration: "neckCircles"
+      },
+      {
+        name: "Upper Trap Stretch",
+        part: "RELEASE & MOBILIZE",
+        instructions: "Sit on one hand. Tilt ear toward opposite shoulder, add light pressure with free hand.",
+        type: "timed",
+        duration: 40,
+        sides: 2,
+        sideNames: ["LEFT SIDE", "RIGHT SIDE"],
+        illustration: "upperTrap"
+      },
+      {
+        name: "Levator Scap Stretch",
+        part: "RELEASE & MOBILIZE",
+        instructions: "Same position, but rotate nose toward armpit before tilting down.",
+        type: "timed",
+        duration: 40,
+        sides: 2,
+        sideNames: ["LEFT SIDE", "RIGHT SIDE"],
+        illustration: "levatorScap"
+      },
+      {
+        name: "Doorway Pec Stretch",
+        part: "OPEN FRONT BODY",
+        instructions: "Forearm against doorframe at 90°. Step through until you feel chest stretch.",
+        type: "timed",
+        duration: 40,
+        sides: 2,
+        sideNames: ["LEFT ARM", "RIGHT ARM"],
+        illustration: "doorwayPec"
+      },
+      {
+        name: "Thread the Needle",
+        part: "OPEN FRONT BODY",
+        instructions: "On hands and knees, slide one arm under body. Let shoulder and head rest on floor.",
+        type: "timed",
+        duration: 30,
+        sides: 2,
+        rounds: 2,
+        sideNames: ["LEFT ARM", "RIGHT ARM"],
+        illustration: "threadNeedle"
+      },
+      {
+        name: "Chin Tuck + Nod",
+        part: "STRENGTHEN",
+        instructions: "Lie on back. Tuck chin, lift head 1-2cm off floor. Hold 8 seconds.",
+        type: "manual",
+        reps: 10,
+        hold: 8,
+        sides: 1,
+        illustration: "chinTuckNod"
+      },
+      {
+        name: "Y-T-W Raises",
+        part: "STRENGTHEN",
+        instructions: "Lie face down. Thumbs up, raise arms into Y, T, W positions. Squeeze shoulder blades.",
+        type: "reps",
+        reps: 8,
+        sides: 3,
+        sideNames: ["Y POSITION", "T POSITION", "W POSITION"],
+        illustration: "ytwRaises"
+      },
+      {
+        name: "Wall Angels",
+        part: "STRENGTHEN",
+        instructions: "Back against wall, arms in goal post. Slide up and down keeping contact with wall.",
+        type: "reps",
+        reps: 12,
+        sides: 1,
+        illustration: "wallAngels"
+      },
+      {
+        name: "Rest Position",
+        part: "RESET",
+        instructions: "Lie flat with towel under neck curve. Arms at sides, palms up. Breathe and settle.",
+        type: "timed",
+        duration: 90,
+        sides: 1,
+        illustration: "restPosition"
+      }
+    ];
+
+    // State
+    let currentExercise = 0;
+    let currentSide = 0;
+    let currentRound = 1;
+    let currentRep = 0;
+    let timeRemaining = 0;
+    let timerInterval = null;
+    let sessionStartTime = null;
+    let sessionTimerInterval = null;
+    let soundEnabled = true;
+
+    // Audio
+    let audioCtx = null;
+    function beep(freq = 800, dur = 100) {
+      if (!soundEnabled) return;
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + dur / 1000);
+      osc.start();
+      osc.stop(audioCtx.currentTime + dur / 1000);
+    }
+
+    function completionBeep() {
+      beep(600, 80);
+      setTimeout(() => beep(800, 80), 100);
+      setTimeout(() => beep(1000, 150), 200);
+    }
+
+    // DOM
+    const $ = id => document.getElementById(id);
+    const startScreen = $('startScreen');
+    const exerciseScreen = $('exerciseScreen');
+    const completionScreen = $('completionScreen');
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function updateSessionTimer() {
+      if (!sessionStartTime) return;
+      const elapsed = Math.floor((Date.now() - sessionStartTime) / 1000);
+      $('sessionTimer').textContent = formatTime(elapsed);
+    }
+
+    function renderProgressDots() {
+      const container = $('progressDots');
+      container.innerHTML = '';
+
+      exercises.forEach((ex, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        if (i < currentExercise) dot.classList.add('completed');
+        if (i === currentExercise) dot.classList.add('active');
+        container.appendChild(dot);
+      });
+    }
+
+    function showExercise() {
+      const ex = exercises[currentExercise];
+
+      $('headerTitle').textContent = ex.part;
+      $('exerciseName').textContent = ex.name;
+      $('instructions').textContent = ex.instructions;
+      $('illustration').innerHTML = illustrations[ex.illustration] || '';
+
+      // Side label
+      const sideLabel = $('sideLabel');
+      if (ex.sides > 1 && ex.sideNames) {
+        const roundText = ex.rounds > 1 ? ` · ROUND ${currentRound}` : '';
+        sideLabel.textContent = ex.sideNames[currentSide] + roundText;
+        sideLabel.classList.remove('hidden');
+      } else {
+        sideLabel.classList.add('hidden');
+      }
+
+      // Stats
+      const stats = $('stats');
+      const secondaryStat = $('secondaryStat');
+
+      if (ex.type === 'timed') {
+        timeRemaining = ex.duration;
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'SECONDS';
+        $('primaryStat').textContent = timeRemaining;
+        $('primaryStat').className = 'stat-value yellow';
+        secondaryStat.classList.add('hidden');
+        $('doneBtn').innerHTML = 'SKIP <span class="checkmark">→</span>';
+        startTimer();
+      } else if (ex.type === 'manual') {
+        // Manual type: show reps/hold info, single DONE button
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
+        $('primaryStat').textContent = ex.reps;
+        $('primaryStat').className = 'stat-value yellow';
+
+        if (ex.hold) {
+          secondaryStat.classList.remove('hidden');
+          $('secondaryValue').textContent = `${ex.hold}s`;
+        } else {
+          secondaryStat.classList.add('hidden');
+        }
+        $('doneBtn').innerHTML = 'DONE <span class="checkmark">✓</span>';
+      } else {
+        currentRep = 0;
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
+        $('primaryStat').textContent = `${currentRep}/${ex.reps}`;
+        $('primaryStat').className = 'stat-value yellow';
+
+        if (ex.hold) {
+          secondaryStat.classList.remove('hidden');
+          $('secondaryValue').textContent = `${ex.hold}s`;
+        } else {
+          secondaryStat.classList.add('hidden');
+        }
+        $('doneBtn').innerHTML = 'COUNT <span class="checkmark">+1</span>';
+      }
+
+      renderProgressDots();
+
+      $('prevBtn').disabled = currentExercise === 0 && currentSide === 0 && currentRound === 1;
+      $('backBtn').disabled = $('prevBtn').disabled;
+
+      // Animate
+      $('exerciseInfo').classList.remove('fade-in');
+      void $('exerciseInfo').offsetWidth;
+      $('exerciseInfo').classList.add('fade-in');
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        $('primaryStat').textContent = timeRemaining;
+
+        if (timeRemaining <= 5 && timeRemaining > 0) {
+          $('primaryStat').className = 'stat-value orange';
+          beep(500, 60);
+        }
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          completionBeep();
+          advanceStep();
+        }
+      }, 1000);
+    }
+
+    function advanceStep() {
+      const ex = exercises[currentExercise];
+      const maxRounds = ex.rounds || 1;
+
+      if (currentSide < ex.sides - 1) {
+        currentSide++;
+        showExercise();
+      } else if (currentRound < maxRounds) {
+        currentRound++;
+        currentSide = 0;
+        showExercise();
+      } else {
+        goNext();
+      }
+    }
+
+    function handleDone() {
+      const ex = exercises[currentExercise];
+
+      if (ex.type === 'timed') {
+        clearInterval(timerInterval);
+        advanceStep();
+      } else if (ex.type === 'manual') {
+        completionBeep();
+        advanceStep();
+      } else {
+        currentRep++;
+        beep(400, 40);
+        $('primaryStat').textContent = `${currentRep}/${ex.reps}`;
+
+        if (currentRep >= ex.reps) {
+          setTimeout(() => {
+            completionBeep();
+            advanceStep();
+          }, 200);
+        }
+      }
+    }
+
+    function goNext() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      if (currentExercise < exercises.length - 1) {
+        currentExercise++;
+        currentSide = 0;
+        currentRound = 1;
+        showExercise();
+      } else {
+        showCompletion();
+      }
+    }
+
+    function goPrev() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      const ex = exercises[currentExercise];
+      const maxRounds = ex.rounds || 1;
+
+      if (currentSide > 0) {
+        currentSide--;
+      } else if (currentRound > 1) {
+        currentRound--;
+        currentSide = ex.sides - 1;
+      } else if (currentExercise > 0) {
+        currentExercise--;
+        const prev = exercises[currentExercise];
+        currentRound = prev.rounds || 1;
+        currentSide = prev.sides - 1;
+      }
+      showExercise();
+    }
+
+    function showCompletion() {
+      if (timerInterval) clearInterval(timerInterval);
+      if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+
+      const elapsed = Math.floor((Date.now() - sessionStartTime) / 1000);
+      $('finalTime').textContent = formatTime(elapsed);
+
+      exerciseScreen.classList.remove('active');
+      completionScreen.classList.add('active');
+      completionBeep();
+    }
+
+    function startSession() {
+      currentExercise = 0;
+      currentSide = 0;
+      currentRound = 1;
+      sessionStartTime = Date.now();
+
+      startScreen.style.display = 'none';
+      completionScreen.classList.remove('active');
+      exerciseScreen.classList.add('active');
+
+      sessionTimerInterval = setInterval(updateSessionTimer, 1000);
+      showExercise();
+    }
+
+    // Events
+    $('startBtn').addEventListener('click', startSession);
+    $('restartBtn').addEventListener('click', startSession);
+    $('doneBtn').addEventListener('click', handleDone);
+    $('nextBtn').addEventListener('click', goNext);
+    $('prevBtn').addEventListener('click', goPrev);
+    $('backBtn').addEventListener('click', goPrev);
+    $('soundToggle').addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      $('soundToggle').textContent = soundEnabled ? '🔔' : '🔕';
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (startScreen.style.display !== 'none' && !exerciseScreen.classList.contains('active')) {
+        if (e.code === 'Space' || e.code === 'Enter') {
+          e.preventDefault();
+          startSession();
+        }
+        return;
+      }
+
+      if (!exerciseScreen.classList.contains('active')) return;
+
+      switch (e.code) {
+        case 'Space':
+        case 'Enter':
+          e.preventDefault();
+          handleDone();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          goNext();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          goPrev();
+          break;
+      }
+    });
+  </script>
+</body>
+
+</html>
