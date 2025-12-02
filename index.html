@@ -1134,9 +1134,9 @@
         }
         $('doneBtn').innerHTML = 'DONE <span class="checkmark">✓</span>';
       } else {
-        currentRep = 0;
+        // Rep-based exercises: show total reps, allow marking as done
         $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
-        $('primaryStat').textContent = `${currentRep}/${ex.reps}`;
+        $('primaryStat').textContent = ex.reps;
         $('primaryStat').className = 'stat-value yellow';
 
         if (ex.hold) {
@@ -1145,7 +1145,7 @@
         } else {
           secondaryStat.classList.add('hidden');
         }
-        $('doneBtn').innerHTML = 'COUNT <span class="checkmark">+1</span>';
+        $('doneBtn').innerHTML = 'DONE <span class="checkmark">✓</span>';
       }
 
       renderProgressDots();
@@ -1204,16 +1204,9 @@
         completionBeep();
         advanceStep();
       } else {
-        currentRep++;
-        beep(400, 40);
-        $('primaryStat').textContent = `${currentRep}/${ex.reps}`;
-
-        if (currentRep >= ex.reps) {
-          setTimeout(() => {
-            completionBeep();
-            advanceStep();
-          }, 200);
-        }
+        // Rep-based exercises: mark entire exercise as done
+        completionBeep();
+        advanceStep();
       }
     }
 
