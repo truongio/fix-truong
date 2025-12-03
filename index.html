@@ -155,13 +155,13 @@
     .progress-dots {
       display: flex;
       gap: 8px;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .dot {
       width: 24px;
-      height: 6px;
-      border-radius: 3px;
+      height: 8px;
+      border-radius: 4px;
       background: var(--text-dim);
       opacity: 0.3;
       transition: all 0.3s ease;
@@ -230,7 +230,8 @@
       width: 120px;
       height: 120px;
       margin-bottom: 24px;
-      opacity: 0.6;
+      margin-top: 16px;
+      opacity: 0.7;
     }
 
     .illustration svg {
@@ -653,11 +654,12 @@
 
       <div class="main-content">
         <div class="exercise-info fade-in" id="exerciseInfo">
-          <div class="illustration" id="illustration"></div>
           <div class="side-label hidden" id="sideLabel">LEFT SIDE</div>
           <h1 class="exercise-name" id="exerciseName">Chin Tucks</h1>
 
           <div class="progress-dots" id="progressDots"></div>
+          
+          <div class="illustration" id="illustration"></div>
 
           <div class="stats" id="stats">
             <div class="stat">
@@ -708,8 +710,8 @@
     const illustrations = {
       chinTucks: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-back" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-back" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
           </marker>
         </defs>
         <!-- Side view of head and neck -->
@@ -725,7 +727,7 @@
             <line x1="50" y1="35" x2="55" y2="38" stroke="white" stroke-width="2"/>
           </g>
           <!-- Arrow showing movement -->
-          <path d="M35 40 L45 40" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-back)"/>
+          <path d="M35 40 L45 40" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-back)"/>
           <!-- Shoulders -->
           <line x1="50" y1="75" x2="35" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
           <line x1="50" y1="75" x2="65" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
@@ -734,8 +736,8 @@
 
       neckCircles: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-circle-nc" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-circle-nc" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.4" />
           </marker>
         </defs>
         <!-- Body -->
@@ -750,14 +752,14 @@
           <circle cx="55" cy="38" r="1.5" fill="white"/>
         </g>
         <!-- Circular path indicator -->
-        <path d="M30 40 A 20 20 0 1 1 70 40" stroke="#f5c518" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.6" marker-end="url(#arrow-circle-nc)"/>
+        <path d="M30 40 A 20 20 0 1 1 70 40" stroke="#f5c518" stroke-width="1.5" fill="none" stroke-dasharray="3,3" opacity="0.4" marker-end="url(#arrow-circle-nc)"/>
         <path d="M70 40 A 20 20 0 1 1 30 40" stroke="#f5c518" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.3"/>
       </svg>`,
 
       upperTrap: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-ut" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-ut" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
           </marker>
         </defs>
         <!-- Body sitting -->
@@ -775,13 +777,13 @@
           <circle cx="55" cy="32" r="3" fill="#f5c518" opacity="0.7"/>
         </g>
         <!-- Arrow showing tilt direction -->
-        <path d="M65 45 L70 50" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ut)"/>
+        <path d="M65 45 L70 50" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-ut)"/>
       </svg>`,
 
       levatorScap: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-ls" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-ls" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
           </marker>
         </defs>
         <!-- Body sitting -->
@@ -803,13 +805,13 @@
           </g>
         </g>
         <!-- Arrow showing look direction -->
-        <path d="M60 50 L70 60" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ls)"/>
+        <path d="M60 50 L70 60" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-ls)"/>
       </svg>`,
 
       doorwayPec: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-dp" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-dp" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
           </marker>
         </defs>
         <!-- Doorframe -->
@@ -829,13 +831,13 @@
           <path d="M50 50 L50 45 L45 48" stroke="white" stroke-width="2"/>
         </g>
         <!-- Arrow showing step forward -->
-        <path d="M40 65 L50 65" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-dp)"/>
+        <path d="M40 65 L50 65" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-dp)"/>
       </svg>`,
 
       threadNeedle: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-tn" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-tn" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
           </marker>
         </defs>
         <!-- Floor -->
@@ -855,13 +857,13 @@
           <circle cx="15" cy="90" r="4" fill="white" opacity="0.6"/>
         </g>
         <!-- Arrow showing threading motion -->
-        <path d="M35 80 L25 85" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-tn)"/>
+        <path d="M35 80 L25 85" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-tn)"/>
       </svg>`,
 
       chinTuckNod: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-ctn" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-ctn" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
           </marker>
         </defs>
         <!-- Floor -->
@@ -874,7 +876,7 @@
           <!-- Chin tucked -->
           <path d="M20 75 Q 18 73 16 75" stroke="white" stroke-width="2"/>
           <!-- Arrow showing lift -->
-          <path d="M20 65 L20 55" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ctn)"/>
+          <path d="M20 65 L20 55" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-ctn)"/>
         </g>
         <!-- Text indicator -->
         <text x="50" y="95" font-size="8" fill="#666" text-anchor="middle">1-2cm LIFT</text>
@@ -909,8 +911,8 @@
 
       wallAngels: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-wa" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
+          <marker id="arrow-wa" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
           </marker>
         </defs>
         <!-- Wall -->
@@ -927,8 +929,8 @@
           <path d="M50 50 L70 50 L70 30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         </g>
         <!-- Arrows showing up/down motion -->
-        <path d="M75 40 L75 60" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-wa)"/>
-        <path d="M25 60 L25 40" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-wa)"/>
+        <path d="M75 40 L75 60" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-wa)"/>
+        <path d="M25 60 L25 40" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-wa)"/>
       </svg>`,
 
       restPosition: `<svg viewBox="0 0 100 100">
@@ -1088,6 +1090,14 @@
       setTimeout(() => beep(1000, 150), 200);
     }
 
+    function timerCompleteSound() {
+      if (!soundEnabled) return;
+      // More prominent sound sequence for timer completion
+      beep(800, 150);
+      setTimeout(() => beep(1000, 150), 150);
+      setTimeout(() => beep(1200, 200), 300);
+    }
+
     // DOM
     const $ = id => document.getElementById(id);
     const startScreen = $('startScreen');
@@ -1207,7 +1217,7 @@
 
         if (timeRemaining <= 0) {
           clearInterval(timerInterval);
-          completionBeep();
+          timerCompleteSound();
           // Trigger slide-out animation before advancing
           const exerciseInfo = $('exerciseInfo');
           exerciseInfo.classList.remove('fade-in', 'slide-in');
