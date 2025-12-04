@@ -14,22 +14,42 @@
     }
 
     :root {
-      --bg: #000000;
-      --text: #ffffff;
-      --text-dim: #666666;
-      --accent: #f5c518;
-      --accent-orange: #ff6b35;
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.3);
+      --accent-orange: #fb923c;
       --success: #4ade80;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       min-height: 100dvh;
       overflow: hidden;
     }
+
+    /* ... (keep mobile styles mostly as is, but update colors via variables) ... */
+
+    /* Global Scrollbar Hiding */
+    * {
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE/Edge */
+    }
+
+    *::-webkit-scrollbar {
+      display: none;
+      /* Chrome/Safari/Opera */
+    }
+
+    /* ... (existing mobile styles) ... */
 
     .app {
       height: 100vh;
@@ -38,6 +58,7 @@
       flex-direction: column;
       max-width: 500px;
       margin: 0 auto;
+      transition: all 0.3s ease;
     }
 
     /* Start Screen */
@@ -155,13 +176,13 @@
     .progress-dots {
       display: flex;
       gap: 8px;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .dot {
       width: 24px;
-      height: 8px;
-      border-radius: 4px;
+      height: 6px;
+      border-radius: 3px;
       background: var(--text-dim);
       opacity: 0.3;
       transition: all 0.3s ease;
@@ -230,8 +251,7 @@
       width: 120px;
       height: 120px;
       margin-bottom: 24px;
-      margin-top: 16px;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     .illustration svg {
@@ -303,66 +323,157 @@
     }
 
     @keyframes tuck {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(-8px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(-8px);
+      }
     }
 
     @keyframes circle {
-      0% { transform: rotate(0deg) translateX(0) translateY(0); }
-      25% { transform: rotate(90deg) translateX(0) translateY(-10px); }
-      50% { transform: rotate(180deg) translateX(0) translateY(0); }
-      75% { transform: rotate(270deg) translateX(0) translateY(10px); }
-      100% { transform: rotate(360deg) translateX(0) translateY(0); }
+      0% {
+        transform: rotate(0deg) translateX(0) translateY(0);
+      }
+
+      25% {
+        transform: rotate(90deg) translateX(0) translateY(-10px);
+      }
+
+      50% {
+        transform: rotate(180deg) translateX(0) translateY(0);
+      }
+
+      75% {
+        transform: rotate(270deg) translateX(0) translateY(10px);
+      }
+
+      100% {
+        transform: rotate(360deg) translateX(0) translateY(0);
+      }
     }
 
     @keyframes slide-up {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
     }
 
     @keyframes slide-down {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(15px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(15px);
+      }
     }
 
     @keyframes rotate-arms-up {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(-45deg); }
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(-45deg);
+      }
     }
 
     @keyframes rotate-arms-down {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(45deg); }
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(45deg);
+      }
     }
 
     @keyframes lift-head {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-5px) rotate(-8deg); }
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-5px) rotate(-8deg);
+      }
     }
 
     @keyframes step-forward {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(8px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(8px);
+      }
     }
 
     @keyframes thread-arm {
-      0%, 100% { transform: translateX(0) translateY(0); }
-      50% { transform: translateX(-15px) translateY(10px); }
+
+      0%,
+      100% {
+        transform: translateX(0) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-15px) translateY(10px);
+      }
     }
 
     @keyframes y-position {
-      0%, 100% { transform: rotate(0deg) translateY(0); }
-      50% { transform: rotate(-30deg) translateY(-20px); }
+
+      0%,
+      100% {
+        transform: rotate(0deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(-30deg) translateY(-20px);
+      }
     }
 
     @keyframes t-position {
-      0%, 100% { transform: rotate(0deg) translateY(0); }
-      50% { transform: rotate(0deg) translateY(-15px); }
+
+      0%,
+      100% {
+        transform: rotate(0deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(0deg) translateY(-15px);
+      }
     }
 
     @keyframes w-position {
-      0%, 100% { transform: rotate(0deg) translateY(0); }
-      50% { transform: rotate(15deg) translateY(-10px); }
+
+      0%,
+      100% {
+        transform: rotate(0deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(15deg) translateY(-10px);
+      }
     }
 
     .anim-breathe {
@@ -569,14 +680,29 @@
     /* Sound Toggle */
     .sound-toggle {
       position: fixed;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      font-size: 1.2rem;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-dim);
       cursor: pointer;
-      opacity: 0.5;
       z-index: 100;
+      padding: 8px 16px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .sound-toggle:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Desktop Sidebar - Hidden on Mobile */
+    .desktop-sidebar {
+      display: none;
     }
 
     /* Hidden */
@@ -602,6 +728,7 @@
         opacity: 1;
         transform: translateX(0);
       }
+
       to {
         opacity: 0;
         transform: translateX(-100%);
@@ -613,6 +740,7 @@
         opacity: 0;
         transform: translateX(100%);
       }
+
       to {
         opacity: 1;
         transform: translateX(0);
@@ -630,12 +758,472 @@
     .slide-in {
       animation: slideIn 0.3s ease forwards;
     }
+
+    /* Desktop Redesign - Light Mode & Fluid */
+    @media (min-width: 1024px) {
+      :root {
+        --bg: #ffffff;
+        --text: #111827;
+        --text-dim: #6b7280;
+        --accent: #2563eb;
+        /* Royal Blue */
+        --accent-glow: rgba(37, 99, 235, 0.15);
+        --accent-orange: #f97316;
+        --success: #10b981;
+        --sidebar-bg: #f9fafb;
+        --illustration-bg: #f3f4f6;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+
+      .app {
+        max-width: 100%;
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+        background: var(--bg);
+        box-shadow: none;
+        flex-direction: row;
+        overflow: hidden;
+        position: relative;
+        margin: 0;
+      }
+
+      /* Start Screen Desktop */
+      .start-screen {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 120px;
+        padding: 0;
+        background: var(--bg);
+      }
+
+      .start-screen h1 {
+        font-size: 8rem;
+        line-height: 0.9;
+        margin-bottom: 40px;
+        color: var(--text);
+        letter-spacing: -3px;
+        background: none;
+        -webkit-background-clip: border-box;
+        background-clip: border-box;
+        -webkit-text-fill-color: var(--text);
+      }
+
+      .start-screen .subtitle {
+        font-size: 1.8rem;
+        margin-bottom: 60px;
+        font-weight: 400;
+        color: var(--text-dim);
+      }
+
+      .start-btn {
+        font-size: 1.5rem;
+        padding: 24px 80px;
+        background: var(--text);
+        color: #fff;
+        border-radius: 100px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .start-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Exercise Screen Grid */
+      .exercise-screen {
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: auto 1fr;
+        background: var(--bg);
+      }
+
+      .exercise-screen.active {
+        display: grid;
+      }
+
+      /* Sidebar */
+      .desktop-sidebar {
+        grid-row: 1 / -1;
+        grid-column: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--sidebar-bg);
+        border-right: none;
+        /* No border for cleaner look */
+        padding: 60px 0;
+        overflow-y: auto;
+        z-index: 10;
+      }
+
+      .sidebar-item {
+        padding: 20px 40px;
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-weight: 500;
+      }
+
+      .sidebar-item:hover {
+        background: rgba(0, 0, 0, 0.03);
+        color: var(--text);
+        padding-left: 48px;
+      }
+
+      .sidebar-item.active {
+        color: var(--accent);
+        background: transparent;
+        border-left-color: var(--accent);
+        font-weight: 600;
+      }
+
+      .sidebar-item.completed {
+        color: var(--success);
+        opacity: 1;
+      }
+
+      /* Header */
+      .header {
+        grid-column: 2;
+        grid-row: 1;
+        padding: 60px 100px 20px;
+        justify-content: space-between;
+        border-bottom: none;
+        background: transparent;
+        z-index: 10;
+      }
+
+      .header-title {
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        font-weight: 600;
+      }
+
+      .header-timer {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--text-dim);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .back-btn {
+        display: none;
+      }
+
+      /* Main Content Area */
+      .main-content {
+        grid-column: 2;
+        grid-row: 2;
+        display: block;
+        padding: 0 100px 80px;
+        overflow-y: auto;
+        height: 100%;
+      }
+
+      .exercise-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 120px;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .illustration {
+        grid-column: 1;
+        grid-row: 1 / span 10;
+        width: 100%;
+        height: 100%;
+        max-height: 700px;
+        background: transparent;
+        /* Removed card bg */
+        border-radius: 0;
+        border: none;
+        padding: 0;
+        opacity: 1;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* Add a subtle shape behind illustration instead of a card */
+      .illustration::before {
+        content: '';
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: var(--illustration-bg);
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0.5;
+        filter: blur(60px);
+      }
+
+      .illustration svg {
+        width: 120%;
+        /* Make illustration larger */
+        height: 120%;
+        filter: none;
+        /* Clean SVG */
+      }
+
+      .illustration line,
+      .illustration circle,
+      .illustration path,
+      .illustration ellipse {
+        stroke: var(--text);
+        /* Ensure lines are dark */
+      }
+
+      /* Info (Right) */
+      .side-label {
+        grid-column: 2;
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .exercise-name {
+        grid-column: 2;
+        font-size: 5.5rem;
+        line-height: 1;
+        margin-bottom: 40px;
+        font-weight: 800;
+        color: var(--text);
+        background: none;
+        -webkit-text-fill-color: var(--text);
+        letter-spacing: -2px;
+      }
+
+      .stats {
+        grid-column: 2;
+        margin-bottom: 60px;
+        gap: 100px;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        margin-bottom: 12px;
+        color: var(--text-dim);
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .stat-value {
+        font-size: 6rem;
+        font-weight: 800;
+        color: var(--text);
+        text-shadow: none;
+      }
+
+      .stat-value.yellow {
+        color: var(--accent);
+        text-shadow: none;
+      }
+
+      .stat-value.orange {
+        color: var(--accent-orange);
+      }
+
+      .instructions {
+        grid-column: 2;
+        font-size: 1.8rem;
+        max-height: none;
+        margin-bottom: 60px;
+        color: var(--text-dim);
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      .progress-dots {
+        display: none;
+      }
+
+      /* Controls */
+      .bottom-controls {
+        grid-column: 2;
+        justify-content: flex-start;
+        gap: 32px;
+        padding: 0;
+      }
+
+      .nav-btn {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+        background: transparent;
+        border: 2px solid #e5e7eb;
+        color: var(--text);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        background: var(--text);
+        color: #fff;
+        border-color: var(--text);
+        transform: scale(1.05);
+      }
+
+      .done-btn {
+        padding: 0 80px;
+        height: 80px;
+        font-size: 1.5rem;
+        border-radius: 100px;
+        background: var(--text);
+        color: #fff;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .done-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Completion Screen Desktop */
+      .completion-screen {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        background: var(--bg);
+      }
+
+      .completion-icon {
+        font-size: 8rem;
+        margin-bottom: 40px;
+        color: var(--success);
+        text-shadow: none;
+      }
+
+      .completion-screen h2 {
+        font-size: 5rem;
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+
+      .completion-screen p {
+        font-size: 2rem;
+        margin-bottom: 80px;
+        color: var(--text-dim);
+      }
+
+      .completion-stats {
+        gap: 120px;
+        margin-bottom: 80px;
+      }
+
+      .completion-stat-value {
+        font-size: 5rem;
+        color: var(--text);
+      }
+
+      .completion-stat-label {
+        font-size: 1.2rem;
+      }
+
+      .restart-btn {
+        padding: 24px 80px;
+        font-size: 1.5rem;
+        border-color: var(--text);
+        border-width: 2px;
+        color: var(--text);
+      }
+
+      .restart-btn:hover {
+        background: var(--text);
+        color: #fff;
+      }
+
+      .sound-toggle {
+        top: 60px;
+        right: 60px;
+        width: auto;
+        height: auto;
+        background: transparent;
+        border: none;
+        color: var(--text-dim);
+        opacity: 1;
+        display: block;
+        border-radius: 0;
+        transition: color 0.3s ease;
+        font-size: 0.8rem;
+        padding: 0;
+      }
+
+      .sound-toggle:hover {
+        background: transparent;
+        color: var(--text);
+        transform: none;
+      }
+
+      /* Smoother Animations */
+      @keyframes slideInDesktop {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideOutDesktop {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        to {
+          opacity: 0;
+          transform: translateY(-40px);
+        }
+      }
+
+      .slide-in {
+        animation: slideInDesktop 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
+      .slide-out {
+        animation: slideOutDesktop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="app">
-    <button class="sound-toggle" id="soundToggle">🔔</button>
+    <button class="sound-toggle" id="soundToggle">SOUND ON</button>
 
     <!-- Start Screen -->
     <div class="start-screen" id="startScreen">
@@ -646,6 +1234,7 @@
 
     <!-- Exercise Screen -->
     <div class="exercise-screen" id="exerciseScreen">
+      <div class="desktop-sidebar" id="desktopSidebar"></div>
       <div class="header">
         <button class="back-btn" id="backBtn">‹</button>
         <span class="header-title" id="headerTitle">RELEASE & MOBILIZE</span>
@@ -654,12 +1243,11 @@
 
       <div class="main-content">
         <div class="exercise-info fade-in" id="exerciseInfo">
+          <div class="illustration" id="illustration"></div>
           <div class="side-label hidden" id="sideLabel">LEFT SIDE</div>
           <h1 class="exercise-name" id="exerciseName">Chin Tucks</h1>
 
           <div class="progress-dots" id="progressDots"></div>
-          
-          <div class="illustration" id="illustration"></div>
 
           <div class="stats" id="stats">
             <div class="stat">
@@ -675,13 +1263,12 @@
           <p class="instructions" id="instructions">
             Gently draw your chin straight back, creating a "double chin." Hold 5 seconds.
           </p>
-        </div>
-
-        <div class="bottom-controls">
-          <button class="nav-btn" id="prevBtn">‹</button>
-          <button class="done-btn" id="doneBtn">
-            DONE <span class="checkmark">✓</span>
-          </button>
+          <div class="bottom-controls">
+            <button class="nav-btn" id="prevBtn">‹</button>
+            <button class="done-btn" id="doneBtn">
+              DONE <span class="checkmark">✓</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -710,8 +1297,8 @@
     const illustrations = {
       chinTucks: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-back" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
+          <marker id="arrow-back" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Side view of head and neck -->
@@ -727,7 +1314,7 @@
             <line x1="50" y1="35" x2="55" y2="38" stroke="white" stroke-width="2"/>
           </g>
           <!-- Arrow showing movement -->
-          <path d="M35 40 L45 40" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-back)"/>
+          <path d="M35 40 L45 40" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-back)"/>
           <!-- Shoulders -->
           <line x1="50" y1="75" x2="35" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
           <line x1="50" y1="75" x2="65" y2="80" stroke="white" stroke-width="3" stroke-linecap="round"/>
@@ -736,8 +1323,8 @@
 
       neckCircles: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-circle-nc" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.4" />
+          <marker id="arrow-circle-nc" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Body -->
@@ -752,14 +1339,14 @@
           <circle cx="55" cy="38" r="1.5" fill="white"/>
         </g>
         <!-- Circular path indicator -->
-        <path d="M30 40 A 20 20 0 1 1 70 40" stroke="#f5c518" stroke-width="1.5" fill="none" stroke-dasharray="3,3" opacity="0.4" marker-end="url(#arrow-circle-nc)"/>
+        <path d="M30 40 A 20 20 0 1 1 70 40" stroke="#f5c518" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.6" marker-end="url(#arrow-circle-nc)"/>
         <path d="M70 40 A 20 20 0 1 1 30 40" stroke="#f5c518" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.3"/>
       </svg>`,
 
       upperTrap: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-ut" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
+          <marker id="arrow-ut" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Body sitting -->
@@ -777,13 +1364,13 @@
           <circle cx="55" cy="32" r="3" fill="#f5c518" opacity="0.7"/>
         </g>
         <!-- Arrow showing tilt direction -->
-        <path d="M65 45 L70 50" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-ut)"/>
+        <path d="M65 45 L70 50" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ut)"/>
       </svg>`,
 
       levatorScap: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-ls" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
+          <marker id="arrow-ls" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Body sitting -->
@@ -805,13 +1392,13 @@
           </g>
         </g>
         <!-- Arrow showing look direction -->
-        <path d="M60 50 L70 60" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-ls)"/>
+        <path d="M60 50 L70 60" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ls)"/>
       </svg>`,
 
       doorwayPec: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-dp" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
+          <marker id="arrow-dp" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Doorframe -->
@@ -831,13 +1418,13 @@
           <path d="M50 50 L50 45 L45 48" stroke="white" stroke-width="2"/>
         </g>
         <!-- Arrow showing step forward -->
-        <path d="M40 65 L50 65" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-dp)"/>
+        <path d="M40 65 L50 65" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-dp)"/>
       </svg>`,
 
       threadNeedle: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-tn" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
+          <marker id="arrow-tn" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Floor -->
@@ -857,13 +1444,13 @@
           <circle cx="15" cy="90" r="4" fill="white" opacity="0.6"/>
         </g>
         <!-- Arrow showing threading motion -->
-        <path d="M35 80 L25 85" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-tn)"/>
+        <path d="M35 80 L25 85" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-tn)"/>
       </svg>`,
 
       chinTuckNod: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-ctn" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
+          <marker id="arrow-ctn" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Floor -->
@@ -876,7 +1463,7 @@
           <!-- Chin tucked -->
           <path d="M20 75 Q 18 73 16 75" stroke="white" stroke-width="2"/>
           <!-- Arrow showing lift -->
-          <path d="M20 65 L20 55" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-ctn)"/>
+          <path d="M20 65 L20 55" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-ctn)"/>
         </g>
         <!-- Text indicator -->
         <text x="50" y="95" font-size="8" fill="#666" text-anchor="middle">1-2cm LIFT</text>
@@ -911,8 +1498,8 @@
 
       wallAngels: `<svg viewBox="0 0 100 100">
         <defs>
-          <marker id="arrow-wa" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#f5c518" opacity="0.5" />
+          <marker id="arrow-wa" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#f5c518" />
           </marker>
         </defs>
         <!-- Wall -->
@@ -929,8 +1516,8 @@
           <path d="M50 50 L70 50 L70 30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         </g>
         <!-- Arrows showing up/down motion -->
-        <path d="M75 40 L75 60" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-wa)"/>
-        <path d="M25 60 L25 40" stroke="#f5c518" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow-wa)"/>
+        <path d="M75 40 L75 60" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-wa)"/>
+        <path d="M25 60 L25 40" stroke="#f5c518" stroke-width="2" marker-end="url(#arrow-wa)"/>
       </svg>`,
 
       restPosition: `<svg viewBox="0 0 100 100">
@@ -1006,37 +1593,19 @@
         sideNames: ["LEFT ARM", "RIGHT ARM"],
         illustration: "doorwayPec"
       },
-      {
-        name: "Thread the Needle",
-        part: "OPEN FRONT BODY",
-        instructions: "On hands and knees, slide one arm under body. Let shoulder and head rest on floor.",
-        type: "timed",
-        duration: 30,
-        sides: 2,
-        rounds: 2,
-        sideNames: ["LEFT ARM", "RIGHT ARM"],
-        illustration: "threadNeedle"
-      },
+
       {
         name: "Chin Tuck + Nod",
         part: "STRENGTHEN",
         instructions: "Lie on back. Tuck chin, lift head 1-2cm off floor. Hold 8 seconds.",
-        type: "manual",
+        type: "auto-reps",
         reps: 10,
         hold: 8,
+        rest: 2,
         sides: 1,
         illustration: "chinTuckNod"
       },
-      {
-        name: "Y-T-W Raises",
-        part: "STRENGTHEN",
-        instructions: "Lie face down. Thumbs up, raise arms into Y, T, W positions. Squeeze shoulder blades.",
-        type: "reps",
-        reps: 8,
-        sides: 3,
-        sideNames: ["Y POSITION", "T POSITION", "W POSITION"],
-        illustration: "ytwRaises"
-      },
+
       {
         name: "Wall Angels",
         part: "STRENGTHEN",
@@ -1046,15 +1615,7 @@
         sides: 1,
         illustration: "wallAngels"
       },
-      {
-        name: "Rest Position",
-        part: "RESET",
-        instructions: "Lie flat with towel under neck curve. Arms at sides, palms up. Breathe and settle.",
-        type: "timed",
-        duration: 90,
-        sides: 1,
-        illustration: "restPosition"
-      }
+
     ];
 
     // State
@@ -1063,6 +1624,7 @@
     let currentRound = 1;
     let currentRep = 0;
     let timeRemaining = 0;
+    let isResting = false;
     let timerInterval = null;
     let sessionStartTime = null;
     let sessionTimerInterval = null;
@@ -1090,14 +1652,6 @@
       setTimeout(() => beep(1000, 150), 200);
     }
 
-    function timerCompleteSound() {
-      if (!soundEnabled) return;
-      // More prominent sound sequence for timer completion
-      beep(800, 150);
-      setTimeout(() => beep(1000, 150), 150);
-      setTimeout(() => beep(1200, 200), 300);
-    }
-
     // DOM
     const $ = id => document.getElementById(id);
     const startScreen = $('startScreen');
@@ -1116,6 +1670,23 @@
       $('sessionTimer').textContent = formatTime(elapsed);
     }
 
+    function renderSidebar() {
+      const sidebar = $('desktopSidebar');
+      if (!sidebar) return;
+
+      sidebar.innerHTML = '';
+      exercises.forEach((ex, i) => {
+        const item = document.createElement('div');
+        item.className = 'sidebar-item';
+        if (i < currentExercise) item.classList.add('completed');
+        if (i === currentExercise) item.classList.add('active');
+
+        const icon = i < currentExercise ? '✓ ' : (i === currentExercise ? '● ' : '· ');
+        item.textContent = icon + ' ' + ex.name;
+        sidebar.appendChild(item);
+      });
+    }
+
     function renderProgressDots() {
       const container = $('progressDots');
       container.innerHTML = '';
@@ -1127,6 +1698,8 @@
         if (i === currentExercise) dot.classList.add('active');
         container.appendChild(dot);
       });
+
+      renderSidebar();
     }
 
     function showExercise() {
@@ -1159,6 +1732,19 @@
         secondaryStat.classList.add('hidden');
         $('doneBtn').innerHTML = 'SKIP <span class="checkmark">→</span>';
         startTimer();
+      } else if (ex.type === 'auto-reps') {
+        // Auto-reps: show current rep and hold/rest timer
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REP 1 / ' + ex.reps;
+        $('primaryStat').textContent = ex.hold;
+        $('primaryStat').className = 'stat-value yellow';
+
+        secondaryStat.classList.remove('hidden');
+        $('secondaryValue').parentElement.querySelector('.stat-label').textContent = 'STATUS';
+        $('secondaryValue').textContent = 'HOLD';
+        $('secondaryValue').className = 'stat-value orange';
+
+        $('doneBtn').innerHTML = 'SKIP <span class="checkmark">→</span>';
+        startAutoRepTimer();
       } else if (ex.type === 'manual') {
         // Manual type: show reps/hold info, single DONE button
         $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
@@ -1197,11 +1783,11 @@
       exerciseInfo.classList.remove('fade-in', 'slide-out', 'slide-in');
       void exerciseInfo.offsetWidth; // Force reflow
       exerciseInfo.classList.add('slide-in');
-      
+
       // Remove slide-in class after animation completes
       setTimeout(() => {
         exerciseInfo.classList.remove('slide-in');
-      }, 300);
+      }, 800);
     }
 
     function startTimer() {
@@ -1217,14 +1803,83 @@
 
         if (timeRemaining <= 0) {
           clearInterval(timerInterval);
-          timerCompleteSound();
+          completionBeep();
           // Trigger slide-out animation before advancing
           const exerciseInfo = $('exerciseInfo');
           exerciseInfo.classList.remove('fade-in', 'slide-in');
           exerciseInfo.classList.add('slide-out');
           setTimeout(() => {
             advanceStep();
-          }, 300);
+          }, 600);
+        }
+      }, 1000);
+    }
+
+    function startAutoRepTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      const ex = exercises[currentExercise];
+      currentRep = 1;
+      isResting = false;
+      timeRemaining = ex.hold;
+
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+
+        // Update Timer UI
+        if (isResting) {
+          $('primaryStat').textContent = timeRemaining;
+          $('primaryStat').className = 'stat-value'; // White/default for rest
+        } else {
+          $('primaryStat').textContent = timeRemaining;
+          $('primaryStat').className = timeRemaining <= 3 ? 'stat-value orange' : 'stat-value yellow';
+        }
+
+        // Beep on last 3 seconds of hold
+        if (!isResting && timeRemaining <= 3 && timeRemaining > 0) {
+          beep(500, 60);
+        }
+
+        if (timeRemaining <= 0) {
+          if (isResting) {
+            // End of Rest -> Start Hold
+            isResting = false;
+            currentRep++;
+            timeRemaining = ex.hold;
+
+            // Update UI for Hold
+            $('primaryStat').parentElement.querySelector('.stat-label').textContent = `REP ${currentRep} / ${ex.reps}`;
+            $('primaryStat').textContent = timeRemaining;
+            $('primaryStat').className = 'stat-value yellow';
+            $('secondaryValue').textContent = 'HOLD';
+            $('secondaryValue').className = 'stat-value orange';
+
+            beep(800, 150); // Start work beep
+          } else {
+            // End of Hold
+            if (currentRep >= ex.reps) {
+              // Finished all reps
+              clearInterval(timerInterval);
+              completionBeep();
+              const exerciseInfo = $('exerciseInfo');
+              exerciseInfo.classList.remove('fade-in', 'slide-in');
+              exerciseInfo.classList.add('slide-out');
+              setTimeout(() => {
+                advanceStep();
+              }, 600);
+            } else {
+              // Start Rest
+              isResting = true;
+              timeRemaining = ex.rest;
+
+              // Update UI for Rest
+              $('primaryStat').textContent = timeRemaining;
+              $('primaryStat').className = 'stat-value';
+              $('secondaryValue').textContent = 'REST';
+              $('secondaryValue').className = 'stat-value'; // White/default
+
+              beep(600, 100); // Rest beep
+            }
+          }
         }
       }, 1000);
     }
@@ -1255,7 +1910,7 @@
 
       // Wait for animation to complete, then advance
       setTimeout(() => {
-        if (ex.type === 'timed') {
+        if (ex.type === 'timed' || ex.type === 'auto-reps') {
           clearInterval(timerInterval);
           advanceStep();
         } else if (ex.type === 'manual') {
@@ -1266,7 +1921,7 @@
           completionBeep();
           advanceStep();
         }
-      }, 300); // Match animation duration
+      }, 600); // Match animation duration
     }
 
     function goNext() {
@@ -1336,7 +1991,8 @@
     $('backBtn').addEventListener('click', goPrev);
     $('soundToggle').addEventListener('click', () => {
       soundEnabled = !soundEnabled;
-      $('soundToggle').textContent = soundEnabled ? '🔔' : '🔕';
+      $('soundToggle').textContent = soundEnabled ? 'SOUND ON' : 'SOUND OFF';
+      $('soundToggle').style.opacity = soundEnabled ? '1' : '0.5';
     });
 
     // Keyboard
