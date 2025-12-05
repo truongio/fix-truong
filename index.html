@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Neck & Posture Fix</title>
+  <title>Fix Truong</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -868,14 +868,15 @@
       }
 
       .start-screen h1 {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
         font-size: var(--text-hero);
-        line-height: 0.85;
+        line-height: 0.9;
         margin-bottom: var(--space-lg);
         color: var(--text);
         letter-spacing: -0.04em;
         text-align: center;
-        font-weight: 400;
+        font-weight: 800;
+        text-transform: uppercase;
         position: relative;
         z-index: 1;
       }
@@ -1066,6 +1067,15 @@
         margin: 0;
       }
 
+      /* Content wrapper for right side - vertical centering */
+      .content-wrapper {
+        grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: var(--space-xl);
+      }
+
       /* Illustration Area (Left) */
       .illustration {
         grid-column: 1;
@@ -1108,19 +1118,16 @@
 
       /* Content Area (Right) */
       .side-label {
-        grid-column: 2;
-        align-self: end;
         font-size: 0.85rem;
         font-weight: 600;
         letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--accent-warm);
         margin: 0;
-        padding: 0 var(--space-xl) var(--space-sm) 0;
+        margin-bottom: var(--space-sm);
       }
 
       .exercise-name {
-        grid-column: 2;
         font-family: var(--font-sans);
         font-size: clamp(2.5rem, 5vw, 5rem);
         font-weight: 800;
@@ -1128,7 +1135,7 @@
         letter-spacing: -0.02em;
         color: var(--text);
         margin: 0;
-        padding: 0 var(--space-xl) var(--space-md) 0;
+        margin-bottom: var(--space-md);
         text-transform: uppercase;
       }
 
@@ -1137,11 +1144,10 @@
       }
 
       .stats {
-        grid-column: 2;
         display: flex;
         gap: var(--space-xl);
         margin: 0;
-        padding: 0 var(--space-xl) var(--space-md) 0;
+        margin-bottom: var(--space-md);
       }
 
       .stat {
@@ -1180,23 +1186,19 @@
       }
 
       .instructions {
-        grid-column: 2;
         font-size: 1.1rem;
         line-height: 1.5;
         color: var(--text-dim);
         font-weight: 400;
         max-height: none;
         margin: 0;
-        padding: 0 var(--space-xl) var(--space-lg) 0;
+        margin-bottom: var(--space-lg);
         max-width: 480px;
       }
 
       .bottom-controls {
-        grid-column: 2;
         display: flex;
         gap: var(--space-md);
-        padding: 0 var(--space-xl) var(--space-md) 0;
-        align-self: start;
       }
 
       .nav-btn {
@@ -1342,10 +1344,11 @@
       }
 
       .completion-screen h2 {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
         font-size: clamp(3rem, 8vw, 6rem);
-        font-weight: 400;
+        font-weight: 800;
         letter-spacing: -0.03em;
+        text-transform: uppercase;
         margin-bottom: var(--space-md);
         color: var(--text);
         position: relative;
@@ -1497,12 +1500,8 @@
       }
 
       /* Staggered entry animations */
-      .slide-in .side-label { animation: fadeInUp 0.6s var(--ease-out-expo) 0.1s both; }
-      .slide-in .exercise-name { animation: fadeInUp 0.6s var(--ease-out-expo) 0.15s both; }
-      .slide-in .stats { animation: fadeInUp 0.6s var(--ease-out-expo) 0.2s both; }
-      .slide-in .instructions { animation: fadeInUp 0.6s var(--ease-out-expo) 0.25s both; }
-      .slide-in .bottom-controls { animation: fadeInUp 0.6s var(--ease-out-expo) 0.3s both; }
-      .slide-in .illustration { animation: fadeInUp 0.8s var(--ease-out-expo) 0s both; }
+      .slide-in .illustration { animation: fadeInUp 0.6s var(--ease-out-expo) 0s both; }
+      .slide-in .content-wrapper { animation: fadeInUp 0.6s var(--ease-out-expo) 0.1s both; }
 
       .slide-out {
         animation: slideOutToLeft 0.5s var(--ease-out-expo) forwards;
@@ -1522,7 +1521,7 @@
 
     <!-- Start Screen -->
     <div class="start-screen" id="startScreen">
-      <h1>Neck &<br>Posture</h1>
+      <h1>Fix<br>Truong</h1>
       <p class="subtitle">15–20 min · 7 exercises</p>
       <button class="start-btn" id="startBtn"><span>Begin Session</span></button>
     </div>
@@ -1539,30 +1538,32 @@
       <div class="main-content">
         <div class="exercise-info fade-in" id="exerciseInfo">
           <div class="illustration" id="illustration"></div>
-          <div class="side-label hidden" id="sideLabel">LEFT SIDE</div>
-          <h1 class="exercise-name" id="exerciseName">Chin Tucks</h1>
+          <div class="content-wrapper">
+            <div class="side-label hidden" id="sideLabel">LEFT SIDE</div>
+            <h1 class="exercise-name" id="exerciseName">Chin Tucks</h1>
 
-          <div class="progress-dots" id="progressDots"></div>
+            <div class="progress-dots" id="progressDots"></div>
 
-          <div class="stats" id="stats">
-            <div class="stat">
-              <span class="stat-label">REPS</span>
-              <span class="stat-value yellow" id="primaryStat">10</span>
+            <div class="stats" id="stats">
+              <div class="stat">
+                <span class="stat-label">REPS</span>
+                <span class="stat-value yellow" id="primaryStat">10</span>
+              </div>
+              <div class="stat" id="secondaryStat">
+                <span class="stat-label">HOLD</span>
+                <span class="stat-value orange" id="secondaryValue">5s</span>
+              </div>
             </div>
-            <div class="stat" id="secondaryStat">
-              <span class="stat-label">HOLD</span>
-              <span class="stat-value orange" id="secondaryValue">5s</span>
-            </div>
-          </div>
 
-          <p class="instructions" id="instructions">
-            Gently draw your chin straight back, creating a "double chin." Hold 5 seconds.
-          </p>
-          <div class="bottom-controls">
-            <button class="nav-btn" id="prevBtn">‹</button>
-            <button class="done-btn" id="doneBtn">
-              <span>DONE</span> <span class="checkmark">✓</span>
-            </button>
+            <p class="instructions" id="instructions">
+              Gently draw your chin straight back, creating a "double chin." Hold 5 seconds.
+            </p>
+            <div class="bottom-controls">
+              <button class="nav-btn" id="prevBtn">‹</button>
+              <button class="done-btn" id="doneBtn">
+                <span>DONE</span> <span class="checkmark">✓</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1665,36 +1666,47 @@
       </svg>`,
 
       doorwayPec: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Radiating lines from corner -->
+        <!-- Doorway pec stretch: arm against doorframe, stepping through -->
+        <!-- Doorframe (vertical) -->
+        <line x1="70" y1="10" x2="70" y2="90" stroke="#E5E5E5" stroke-width="6"/>
+        <!-- Person's body (vertical torso) -->
         <g class="anim-step-forward">
-          <!-- Vertical edge (doorframe) -->
-          <line x1="85" y1="10" x2="85" y2="90" stroke="#E5E5E5" stroke-width="4"/>
-          <!-- Radiating expansion lines -->
-          <line x1="85" y1="50" x2="20" y2="30" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="85" y1="50" x2="25" y2="50" stroke="#525252" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-          <line x1="85" y1="50" x2="20" y2="70" stroke="#A3A3A3" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+          <line x1="45" y1="45" x2="45" y2="75" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Head -->
+          <circle cx="45" cy="35" r="8" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+          <!-- Arm at 90° against doorframe -->
+          <!-- Upper arm horizontal -->
+          <line x1="45" y1="48" x2="70" y2="48" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Forearm vertical (90°) -->
+          <line x1="70" y1="48" x2="70" y2="28" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Elbow point -->
+          <circle cx="70" cy="48" r="3" fill="#C2410C"/>
+          <!-- Legs (stepping forward) -->
+          <line x1="45" y1="75" x2="38" y2="90" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round"/>
+          <line x1="45" y1="75" x2="55" y2="90" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round"/>
         </g>
-        <!-- Anchor point -->
-        <circle cx="85" cy="50" r="4" fill="#0A0A0A"/>
-        <!-- Expansion indicator -->
-        <path d="M45 35 L35 30 M35 30 L40 40" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Step direction arrow -->
+        <path d="M30 60 L20 60" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M23 57 L20 60 L23 63" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
       </svg>`,
 
       chinTuckNod: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Rising arc with focal point -->
-        <g class="anim-lift-head" style="transform-origin: 50px 70px">
-          <!-- Rising arc -->
-          <path d="M20 70 Q50 20 80 70" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Inner arcs showing lift -->
-          <path d="M30 65 Q50 35 70 65" fill="none" stroke="#525252" stroke-width="1.5" opacity="0.5"/>
-          <path d="M38 60 Q50 45 62 60" fill="none" stroke="#A3A3A3" stroke-width="1" opacity="0.3"/>
+        <!-- Abstract: Lying flat with small head lift -->
+        <!-- Ground/floor line -->
+        <line x1="10" y1="70" x2="90" y2="70" stroke="#E5E5E5" stroke-width="3" stroke-linecap="round"/>
+        <!-- Body lying flat (horizontal line) -->
+        <line x1="35" y1="65" x2="85" y2="65" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Head with slight lift -->
+        <g class="anim-lift-head" style="transform-origin: 25px 65px">
+          <circle cx="25" cy="60" r="12" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+          <!-- Small lift indicator -->
+          <line x1="25" y1="70" x2="25" y2="62" stroke="#C2410C" stroke-width="2" stroke-linecap="round"/>
         </g>
-        <!-- Apex point -->
-        <circle cx="50" cy="30" r="5" fill="#C2410C" class="anim-pulse"/>
-        <!-- Base line -->
-        <line x1="15" y1="75" x2="85" y2="75" stroke="#E5E5E5" stroke-width="2" stroke-linecap="round"/>
-        <!-- Lift indicator -->
-        <line x1="50" y1="75" x2="50" y2="55" stroke="#0A0A0A" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+        <!-- 1-2cm label area -->
+        <text x="25" y="85" font-size="8" fill="#A3A3A3" text-anchor="middle" font-family="Inter, sans-serif">1-2cm</text>
+        <!-- Upward arrow indicator -->
+        <path d="M10 55 L10 45" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M7 48 L10 45 L13 48" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
       </svg>`,
 
       wallAngels: `<svg viewBox="0 0 100 100">
@@ -1724,9 +1736,10 @@
         name: "Chin Tucks",
         part: "RELEASE & MOBILIZE",
         instructions: "Draw your chin straight back, creating a \"double chin.\" Hold 5 seconds.",
-        type: "manual",
+        type: "auto-reps",
         reps: 10,
         hold: 5,
+        rest: 3,
         sides: 1,
         illustration: "chinTucks"
       },
@@ -1802,6 +1815,8 @@
     let currentRep = 0;
     let timeRemaining = 0;
     let isResting = false;
+    let isGettingReady = false;
+    let getReadyTime = 5;
     let timerInterval = null;
     let sessionStartTime = null;
     let sessionTimerInterval = null;
@@ -1908,59 +1923,6 @@
         sideLabel.classList.add('hidden');
       }
 
-      // Stats
-      const stats = $('stats');
-      const secondaryStat = $('secondaryStat');
-
-      if (ex.type === 'timed') {
-        timeRemaining = ex.duration;
-        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'SECONDS';
-        $('primaryStat').textContent = timeRemaining;
-        $('primaryStat').className = 'stat-value yellow';
-        secondaryStat.classList.add('hidden');
-        $('doneBtn').innerHTML = 'SKIP <span class="checkmark">→</span>';
-        startTimer();
-      } else if (ex.type === 'auto-reps') {
-        // Auto-reps: show current rep and hold/rest timer
-        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REP 1 / ' + ex.reps;
-        $('primaryStat').textContent = ex.hold;
-        $('primaryStat').className = 'stat-value yellow';
-
-        secondaryStat.classList.remove('hidden');
-        $('secondaryValue').parentElement.querySelector('.stat-label').textContent = 'STATUS';
-        $('secondaryValue').textContent = 'HOLD';
-        $('secondaryValue').className = 'stat-value orange';
-
-        $('doneBtn').innerHTML = 'SKIP <span class="checkmark">→</span>';
-        startAutoRepTimer();
-      } else if (ex.type === 'manual') {
-        // Manual type: show reps/hold info, single DONE button
-        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
-        $('primaryStat').textContent = ex.reps;
-        $('primaryStat').className = 'stat-value yellow';
-
-        if (ex.hold) {
-          secondaryStat.classList.remove('hidden');
-          $('secondaryValue').textContent = `${ex.hold}s`;
-        } else {
-          secondaryStat.classList.add('hidden');
-        }
-        $('doneBtn').innerHTML = 'DONE <span class="checkmark">✓</span>';
-      } else {
-        // Rep-based exercises: show total reps, allow marking as done
-        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
-        $('primaryStat').textContent = ex.reps;
-        $('primaryStat').className = 'stat-value yellow';
-
-        if (ex.hold) {
-          secondaryStat.classList.remove('hidden');
-          $('secondaryValue').textContent = `${ex.hold}s`;
-        } else {
-          secondaryStat.classList.add('hidden');
-        }
-        $('doneBtn').innerHTML = 'DONE <span class="checkmark">✓</span>';
-      }
-
       renderProgressDots();
 
       $('prevBtn').disabled = currentExercise === 0 && currentSide === 0 && currentRound === 1;
@@ -1976,6 +1938,95 @@
       setTimeout(() => {
         exerciseInfo.classList.remove('slide-in');
       }, 800);
+
+      // Start get ready countdown
+      startGetReadyCountdown();
+    }
+
+    function startGetReadyCountdown() {
+      if (timerInterval) clearInterval(timerInterval);
+      isGettingReady = true;
+      timeRemaining = getReadyTime;
+
+      const secondaryStat = $('secondaryStat');
+
+      // Show GET READY state
+      $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'GET READY';
+      $('primaryStat').textContent = timeRemaining;
+      $('primaryStat').className = 'stat-value';
+      secondaryStat.classList.add('hidden');
+      $('doneBtn').innerHTML = '<span>SKIP</span> <span class="checkmark">→</span>';
+
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        $('primaryStat').textContent = timeRemaining;
+
+        if (timeRemaining <= 5 && timeRemaining > 0) {
+          $('primaryStat').className = 'stat-value orange countdown-warning';
+          beep(500, 60);
+        }
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          isGettingReady = false;
+          completionBeep();
+          startExerciseTimer();
+        }
+      }, 1000);
+    }
+
+    function startExerciseTimer() {
+      const ex = exercises[currentExercise];
+      const secondaryStat = $('secondaryStat');
+
+      if (ex.type === 'timed') {
+        timeRemaining = ex.duration;
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'SECONDS';
+        $('primaryStat').textContent = timeRemaining;
+        $('primaryStat').className = 'stat-value yellow';
+        secondaryStat.classList.add('hidden');
+        $('doneBtn').innerHTML = '<span>SKIP</span> <span class="checkmark">→</span>';
+        startTimer();
+      } else if (ex.type === 'auto-reps') {
+        // Auto-reps: show current rep and hold/rest timer
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REP 1 / ' + ex.reps;
+        $('primaryStat').textContent = ex.hold;
+        $('primaryStat').className = 'stat-value yellow';
+
+        secondaryStat.classList.remove('hidden');
+        $('secondaryValue').parentElement.querySelector('.stat-label').textContent = 'STATUS';
+        $('secondaryValue').textContent = 'HOLD';
+        $('secondaryValue').className = 'stat-value orange';
+
+        $('doneBtn').innerHTML = '<span>SKIP</span> <span class="checkmark">→</span>';
+        startAutoRepTimer();
+      } else if (ex.type === 'manual') {
+        // Manual type: show reps/hold info, single DONE button
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
+        $('primaryStat').textContent = ex.reps;
+        $('primaryStat').className = 'stat-value yellow';
+
+        if (ex.hold) {
+          secondaryStat.classList.remove('hidden');
+          $('secondaryValue').textContent = `${ex.hold}s`;
+        } else {
+          secondaryStat.classList.add('hidden');
+        }
+        $('doneBtn').innerHTML = '<span>DONE</span> <span class="checkmark">✓</span>';
+      } else {
+        // Rep-based exercises: show total reps, allow marking as done
+        $('primaryStat').parentElement.querySelector('.stat-label').textContent = 'REPS';
+        $('primaryStat').textContent = ex.reps;
+        $('primaryStat').className = 'stat-value yellow';
+
+        if (ex.hold) {
+          secondaryStat.classList.remove('hidden');
+          $('secondaryValue').textContent = `${ex.hold}s`;
+        } else {
+          secondaryStat.classList.add('hidden');
+        }
+        $('doneBtn').innerHTML = '<span>DONE</span> <span class="checkmark">✓</span>';
+      }
     }
 
     function startTimer() {
@@ -2013,11 +2064,11 @@
           $('primaryStat').className = 'stat-value'; // White/default for rest
         } else {
           $('primaryStat').textContent = timeRemaining;
-          $('primaryStat').className = timeRemaining <= 3 ? 'stat-value orange' : 'stat-value yellow';
+          $('primaryStat').className = timeRemaining <= 5 ? 'stat-value orange' : 'stat-value yellow';
         }
 
-        // Beep on last 3 seconds of hold
-        if (!isResting && timeRemaining <= 3 && timeRemaining > 0) {
+        // Beep on last 5 seconds of hold
+        if (!isResting && timeRemaining <= 5 && timeRemaining > 0) {
           beep(500, 60);
         }
 
