@@ -92,14 +92,21 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      justify-content: flex-end;
+      align-items: flex-start;
       padding: 40px 24px;
-      text-align: center;
+      text-align: left;
+    }
+
+    .start-screen .start-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 80px;
     }
 
     .start-screen h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: 600;
       margin-bottom: 8px;
       letter-spacing: -0.5px;
@@ -168,6 +175,7 @@
       font-weight: 500;
       letter-spacing: 1px;
       color: var(--text-dim);
+      display: none; /* Hidden on mobile, sound toggle takes this spot */
     }
 
     .header-timer {
@@ -721,24 +729,21 @@
     /* Sound Toggle */
     .sound-toggle {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.75rem;
-      font-weight: 600;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: none;
+      border: none;
+      font-size: 1.25rem;
       color: var(--text-dim);
       cursor: pointer;
       z-index: 100;
-      padding: 8px 16px;
-      border-radius: 20px;
-      letter-spacing: 1px;
+      padding: 8px;
       transition: all 0.2s;
     }
 
     .sound-toggle:active {
-      background: rgba(255, 255, 255, 0.2);
+      opacity: 0.6;
     }
 
     /* Desktop Sidebar - Hidden on Mobile */
@@ -867,6 +872,13 @@
         pointer-events: none;
       }
 
+      .start-screen .start-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0;
+      }
+
       .start-screen h1 {
         font-family: var(--font-sans);
         font-size: var(--text-hero);
@@ -967,6 +979,7 @@
       }
 
       .header-title {
+        display: block; /* Show on desktop */
         font-size: 0.85rem;
         font-weight: 500;
         letter-spacing: 0.2em;
@@ -980,6 +993,7 @@
         color: var(--text-dim);
         font-variant-numeric: tabular-nums;
         letter-spacing: 0.05em;
+        margin-right: 100px; /* Space for sound toggle */
       }
 
       /* Desktop Sidebar - Hidden by default, appears on hover */
@@ -1437,15 +1451,14 @@
          ═══════════════════════════════════════════════════════════════ */
       .sound-toggle {
         position: fixed;
-        top: var(--space-lg);
+        top: 44px;
+        left: auto;
         right: var(--space-xl);
+        transform: none;
         padding: 0;
         background: transparent;
         border: none;
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
+        font-size: 1.25rem;
         color: var(--text-muted);
         cursor: pointer;
         transition: color 0.3s var(--ease-out-expo);
@@ -1517,13 +1530,15 @@
 
 <body>
   <div class="app">
-    <button class="sound-toggle" id="soundToggle">SOUND ON</button>
+    <button class="sound-toggle" id="soundToggle">🔊</button>
 
     <!-- Start Screen -->
     <div class="start-screen" id="startScreen">
-      <h1>Fix<br>Truong</h1>
-      <p class="subtitle">15–20 min · 7 exercises</p>
-      <button class="start-btn" id="startBtn"><span>Begin Session</span></button>
+      <div class="start-content">
+        <h1>Fix<br>Truong</h1>
+        <p class="subtitle">15–20 min · 7 exercises</p>
+        <button class="start-btn" id="startBtn"><span>Begin Session</span></button>
+      </div>
     </div>
 
     <!-- Exercise Screen -->
@@ -1791,7 +1806,7 @@
         type: "auto-reps",
         reps: 10,
         hold: 8,
-        rest: 2,
+        rest: 4,
         sides: 1,
         illustration: "chinTuckNod"
       },
@@ -1875,6 +1890,16 @@
 
         const icon = i < currentExercise ? '✓ ' : (i === currentExercise ? '● ' : '· ');
         item.textContent = icon + ' ' + ex.name;
+
+        // Add click handler to switch exercises
+        item.addEventListener('click', () => {
+          if (timerInterval) clearInterval(timerInterval);
+          currentExercise = i;
+          currentSide = 0;
+          currentRound = 1;
+          showExercise();
+        });
+
         sidebar.appendChild(item);
       });
     }
@@ -2210,7 +2235,7 @@
     $('backBtn').addEventListener('click', goPrev);
     $('soundToggle').addEventListener('click', () => {
       soundEnabled = !soundEnabled;
-      $('soundToggle').textContent = soundEnabled ? 'SOUND ON' : 'SOUND OFF';
+      $('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
       $('soundToggle').style.opacity = soundEnabled ? '1' : '0.5';
     });
 
