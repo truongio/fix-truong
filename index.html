@@ -282,10 +282,14 @@
 
     /* Exercise Illustration */
     .illustration {
-      width: 120px;
-      height: 120px;
+      width: 152px;
+      height: 152px;
       margin-bottom: 24px;
-      opacity: 0.6;
+      opacity: 1;
+      --sketch-ink: #555854;
+      --sketch-mid: #858883;
+      --sketch-light: #B8BAB5;
+      --sketch-wash: #E8E8E4;
     }
 
     .illustration svg {
@@ -296,16 +300,154 @@
     .illustration line,
     .illustration circle,
     .illustration path,
-    .illustration ellipse {
-      stroke: var(--text);
-      stroke-width: 2;
+    .illustration ellipse,
+    .illustration polyline,
+    .illustration polygon {
+      stroke: var(--sketch-ink);
+      stroke-width: 1.15;
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
+      vector-effect: non-scaling-stroke;
     }
 
-    .illustration .head {
-      fill: none;
+    .illustration .sketch-wash {
+      fill: var(--sketch-wash);
+      stroke: none;
+    }
+
+    .illustration .sketch-mid {
+      stroke: var(--sketch-mid);
+      stroke-width: 0.8;
+    }
+
+    .illustration .sketch-light {
+      stroke: var(--sketch-light);
+      stroke-width: 0.65;
+    }
+
+    .illustration .sketch-hatch {
+      stroke: var(--sketch-mid);
+      stroke-width: 0.55;
+      opacity: 0.62;
+    }
+
+    .illustration .motion-guide {
+      stroke: var(--sketch-light);
+      stroke-width: 0.8;
+      stroke-dasharray: 2.5 3;
+      opacity: 0.9;
+    }
+
+    .illustration .sketch-breathe {
+      animation: sketch-breathe 3.8s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center bottom;
+    }
+
+    .illustration .motion-chin-tuck {
+      animation: sketch-chin-tuck 3.2s var(--ease-in-out-expo) infinite;
+      transform-box: fill-box;
+      transform-origin: center bottom;
+    }
+
+    .illustration .motion-neck-circle {
+      animation: sketch-neck-circle 5.5s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: 50% 85%;
+    }
+
+    .illustration .motion-side-bend {
+      animation: sketch-side-bend 4s var(--ease-in-out-expo) infinite;
+      transform-box: fill-box;
+      transform-origin: 50% 90%;
+    }
+
+    .illustration .motion-levator {
+      animation: sketch-levator 4s var(--ease-in-out-expo) infinite;
+      transform-box: fill-box;
+      transform-origin: 45% 90%;
+    }
+
+    .illustration .motion-pec {
+      animation: sketch-pec 4s var(--ease-in-out-expo) infinite;
+      transform-box: fill-box;
+      transform-origin: left bottom;
+    }
+
+    .illustration .motion-nod {
+      animation: sketch-nod 3.4s var(--ease-in-out-expo) infinite;
+      transform-box: fill-box;
+      transform-origin: right bottom;
+    }
+
+    .illustration .motion-angel-left,
+    .illustration .motion-angel-right {
+      transform-box: fill-box;
+    }
+
+    .illustration .motion-angel-left {
+      animation: sketch-angel-left 4.2s var(--ease-in-out-expo) infinite;
+      transform-origin: right bottom;
+    }
+
+    .illustration .motion-angel-right {
+      animation: sketch-angel-right 4.2s var(--ease-in-out-expo) infinite;
+      transform-origin: left bottom;
+    }
+
+    @keyframes sketch-breathe {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(1.012); }
+    }
+
+    @keyframes sketch-chin-tuck {
+      0%, 18%, 100% { transform: translateX(0); }
+      42%, 72% { transform: translateX(-5px); }
+    }
+
+    @keyframes sketch-neck-circle {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      22% { transform: translate(-3px, 4px) rotate(-9deg); }
+      48% { transform: translate(0, 7px) rotate(0deg); }
+      74% { transform: translate(3px, 4px) rotate(9deg); }
+    }
+
+    @keyframes sketch-side-bend {
+      0%, 18%, 100% { transform: rotate(0deg); }
+      45%, 75% { transform: rotate(12deg); }
+    }
+
+    @keyframes sketch-levator {
+      0%, 18%, 100% { transform: rotate(0deg) translate(0, 0); }
+      45%, 75% { transform: rotate(13deg) translate(-2px, 3px); }
+    }
+
+    @keyframes sketch-pec {
+      0%, 18%, 100% { transform: translateX(0) rotate(0deg); }
+      45%, 75% { transform: translateX(-5px) rotate(-2deg); }
+    }
+
+    @keyframes sketch-nod {
+      0%, 18%, 100% { transform: translateY(0) rotate(0deg); }
+      45%, 72% { transform: translateY(-4px) rotate(-5deg); }
+    }
+
+    @keyframes sketch-angel-left {
+      0%, 18%, 100% { transform: rotate(0deg) translateY(0); }
+      48%, 72% { transform: rotate(-22deg) translateY(-9px); }
+    }
+
+    @keyframes sketch-angel-right {
+      0%, 18%, 100% { transform: rotate(0deg) translateY(0); }
+      48%, 72% { transform: rotate(22deg) translateY(-9px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .illustration [class*="motion-"],
+      .illustration .sketch-breathe {
+        animation: none !important;
+      }
     }
 
     @keyframes breathe {
@@ -1105,13 +1247,7 @@
       }
 
       .illustration::before {
-        content: '';
-        position: absolute;
-        width: 80%;
-        height: 80%;
-        background: radial-gradient(circle, var(--illustration-bg) 0%, transparent 70%);
-        opacity: 0.5;
-        pointer-events: none;
+        display: none;
       }
 
       .illustration svg {
@@ -1127,7 +1263,7 @@
       .illustration circle,
       .illustration path,
       .illustration ellipse {
-        stroke: var(--text);
+        stroke: var(--sketch-ink);
       }
 
       /* Content Area (Right) */
@@ -1612,136 +1748,128 @@
   </div>
 
   <script>
-    // Abstract SVG illustrations for each exercise
+    // Anatomical pen-and-wash illustrations for each exercise
     const illustrations = {
-      chinTucks: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Receding concentric circles suggesting backward movement -->
-        <defs>
-          <linearGradient id="fade-ct" x1="100%" y1="0%" x2="0%" y2="0%">
-            <stop offset="0%" style="stop-color:#0A0A0A;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#0A0A0A;stop-opacity:0.1" />
-          </linearGradient>
-        </defs>
-        <!-- Primary circle -->
-        <circle cx="60" cy="50" r="30" fill="none" stroke="#0A0A0A" stroke-width="2.5" class="anim-tuck" style="transform-origin: 60px 50px"/>
-        <!-- Receding circles -->
-        <circle cx="50" cy="50" r="24" fill="none" stroke="#525252" stroke-width="1.5" opacity="0.6"/>
-        <circle cx="42" cy="50" r="18" fill="none" stroke="#A3A3A3" stroke-width="1" opacity="0.4"/>
-        <circle cx="36" cy="50" r="12" fill="none" stroke="#E5E5E5" stroke-width="0.75" opacity="0.3"/>
-        <!-- Direction line -->
-        <line x1="85" y1="50" x2="20" y2="50" stroke="url(#fade-ct)" stroke-width="2" stroke-linecap="round"/>
-        <!-- Accent dot -->
-        <circle cx="60" cy="50" r="4" fill="#C2410C" class="anim-pulse"/>
+      chinTucks: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+        <path class="sketch-wash" d="M51 146 C54 121 61 101 77 91 C91 82 111 85 122 99 C132 112 135 130 137 146 Z"/>
+        <path d="M49 146 C52 123 60 102 76 92 C87 85 99 84 111 89 C127 96 135 119 137 146"/>
+        <path class="sketch-mid" d="M66 111 C79 116 92 117 105 112 M63 122 C78 127 96 128 114 121"/>
+        <g class="motion-chin-tuck">
+          <path class="sketch-wash" d="M69 36 C73 21 86 13 101 15 C118 18 128 32 127 48 C127 59 122 66 116 72 C113 76 113 84 116 91 C102 96 87 94 77 87 C80 79 77 73 72 67 C67 59 66 47 69 36 Z"/>
+          <path d="M69 36 C73 21 86 13 101 15 C118 18 128 32 127 48 C127 55 124 61 119 66 L113 71 C111 75 112 83 116 91"/>
+          <path d="M69 36 C66 47 68 59 73 67 C78 73 80 79 77 87"/>
+          <path d="M126 43 C132 46 133 51 127 54 L123 56 C122 61 119 65 114 68"/>
+          <path class="sketch-mid" d="M112 39 C116 37 120 38 122 40 M116 49 C118 50 121 50 123 49 M114 60 C117 62 120 62 122 60"/>
+          <path class="sketch-hatch" d="M77 30 L84 24 M75 35 L84 27 M75 65 L82 70 M79 72 L86 76 M88 88 L94 92"/>
+        </g>
+        <path class="motion-guide" d="M132 77 C119 77 107 77 96 77 M101 73 L95 77 L101 81"/>
       </svg>`,
 
-      neckCircles: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Rotating arc segments -->
-        <g class="anim-circle" style="transform-origin: 50px 50px">
-          <!-- Arc segments forming a circle -->
-          <path d="M50 20 A30 30 0 0 1 80 50" fill="none" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
-          <path d="M80 50 A30 30 0 0 1 50 80" fill="none" stroke="#525252" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M50 80 A30 30 0 0 1 20 50" fill="none" stroke="#A3A3A3" stroke-width="2" stroke-linecap="round"/>
-          <path d="M20 50 A30 30 0 0 1 50 20" fill="none" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="round"/>
+      neckCircles: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+        <path class="sketch-wash" d="M31 148 C35 119 49 101 68 95 L92 95 C112 101 126 119 130 148 Z"/>
+        <path d="M30 148 C35 120 49 103 68 96 M92 96 C112 103 126 120 131 148 M67 95 C71 105 89 105 93 95"/>
+        <path class="sketch-mid" d="M48 116 C66 123 94 123 112 116 M42 132 C65 138 96 138 119 132"/>
+        <g class="motion-neck-circle">
+          <path class="sketch-wash" d="M57 35 C60 20 69 12 80 12 C94 12 103 23 104 39 L101 64 C98 76 91 86 80 88 C69 86 62 76 59 64 Z"/>
+          <path d="M57 36 C59 21 68 12 80 12 C94 12 102 23 104 39 M104 39 L101 63 C98 76 91 86 80 88 C69 86 62 76 59 63 L57 36"/>
+          <path d="M56 42 C51 45 52 54 58 56 M104 42 C109 45 108 54 102 56"/>
+          <path class="sketch-mid" d="M68 43 C72 40 76 40 78 42 M82 42 C86 40 90 40 93 43 M79 45 L78 57 L82 59 M73 68 C77 71 84 71 88 68"/>
+          <path class="sketch-hatch" d="M62 28 L69 21 M60 34 L69 24 M98 30 L102 36 M96 70 L91 77 M64 69 L69 77"/>
+          <path d="M69 85 L68 96 M91 85 L92 96"/>
         </g>
-        <!-- Center point -->
-        <circle cx="50" cy="50" r="3" fill="#0A0A0A"/>
-        <!-- Outer guide ring -->
-        <circle cx="50" cy="50" r="38" fill="none" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <path class="motion-guide" d="M49 31 C39 52 41 76 56 89 M46 82 L56 90 L55 78 M111 31 C121 52 119 76 104 89"/>
       </svg>`,
 
-      upperTrap: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Tilted oval with pressure point -->
-        <g class="anim-tilt" style="transform-origin: 50px 50px">
-          <!-- Main oval representing tension area -->
-          <ellipse cx="50" cy="45" rx="35" ry="20" fill="none" stroke="#0A0A0A" stroke-width="2" transform="rotate(-15 50 45)"/>
-          <!-- Inner tension lines -->
-          <path d="M25 50 Q50 35 75 50" fill="none" stroke="#525252" stroke-width="1" opacity="0.5"/>
-          <path d="M30 55 Q50 42 70 55" fill="none" stroke="#A3A3A3" stroke-width="0.75" opacity="0.3"/>
+      upperTrap: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+        <path class="sketch-wash" d="M38 147 C40 119 51 102 69 94 C84 88 102 93 116 104 C126 114 130 131 131 147 Z"/>
+        <path d="M37 147 C40 120 50 104 69 95 C84 88 103 93 117 104 C127 115 130 132 131 147"/>
+        <path d="M60 108 C67 115 75 119 82 121 C94 117 103 111 110 103"/>
+        <path class="sketch-hatch" d="M54 108 L67 123 M58 104 L71 119 M63 101 L75 116 M101 106 L91 119"/>
+        <path d="M53 111 C45 122 43 135 45 146 M45 146 C40 143 37 140 35 135"/>
+        <g class="motion-side-bend">
+          <path class="sketch-wash" d="M61 30 C65 17 76 11 88 14 C102 17 111 29 109 43 L104 66 C101 78 94 86 83 88 C72 84 66 75 63 64 Z"/>
+          <path d="M61 31 C65 17 76 11 88 14 C102 17 111 29 109 43 L104 66 C101 78 94 86 83 88 C72 84 66 75 63 64 Z"/>
+          <path class="sketch-mid" d="M75 41 C78 39 82 39 84 41 M93 42 C96 41 99 42 101 44 M87 43 L85 55 L89 57 M78 66 C83 69 89 70 94 67"/>
+          <path d="M72 84 L69 96 M95 83 L101 96"/>
+          <path d="M51 70 C47 61 50 52 58 47 C66 41 73 34 79 28"/>
+          <path d="M79 28 C82 24 86 24 88 28 M78 30 C79 24 82 21 86 22 M82 27 C83 21 87 20 90 23 M87 28 C89 23 93 23 95 26"/>
         </g>
-        <!-- Pressure point -->
-        <circle cx="65" cy="35" r="6" fill="#C2410C" opacity="0.8" class="anim-pulse"/>
-        <circle cx="65" cy="35" r="10" fill="none" stroke="#C2410C" stroke-width="1" opacity="0.4"/>
-        <!-- Direction indicator -->
-        <line x1="50" y1="70" x2="65" y2="80" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+        <path class="motion-guide" d="M113 39 C119 55 115 72 103 83 M109 80 L103 84 L102 76"/>
       </svg>`,
 
-      levatorScap: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Diagonal tension lines -->
-        <g class="anim-tilt" style="transform-origin: 50px 50px">
-          <!-- Primary diagonal -->
-          <line x1="25" y1="75" x2="75" y2="25" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
-          <!-- Parallel tension lines -->
-          <line x1="30" y1="80" x2="80" y2="30" stroke="#525252" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-          <line x1="20" y1="70" x2="70" y2="20" stroke="#A3A3A3" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+      levatorScap: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+        <path class="sketch-wash" d="M34 147 C37 122 48 104 66 96 C85 87 108 95 121 111 C128 121 130 134 131 147 Z"/>
+        <path d="M33 147 C37 121 48 104 66 96 C85 88 108 95 121 111 C128 121 130 135 131 147"/>
+        <path class="sketch-mid" d="M48 119 C67 128 91 130 113 119 M44 134 C67 141 99 141 123 133"/>
+        <path class="sketch-hatch" d="M94 98 L77 124 M99 100 L83 126 M104 103 L88 128 M109 106 L94 129"/>
+        <g class="motion-levator">
+          <path class="sketch-wash" d="M57 32 C63 18 74 13 87 16 C101 20 109 33 106 47 C103 60 96 70 85 78 C75 78 65 72 59 62 C54 53 53 41 57 32 Z"/>
+          <path d="M57 32 C63 18 74 13 87 16 C101 20 109 33 106 47 C103 60 96 70 85 78 C75 78 65 72 59 62 C54 53 53 41 57 32 Z"/>
+          <path class="sketch-mid" d="M66 38 C70 36 74 37 77 39 M87 43 C91 43 94 45 96 48 M79 42 L75 52 L78 56 M70 60 C75 64 81 66 86 65"/>
+          <path d="M70 73 L66 96 M91 74 L96 96"/>
+          <path d="M49 70 C44 61 47 51 55 46 C65 38 75 31 83 24"/>
+          <path d="M82 25 C85 21 90 21 92 24 M80 28 C82 22 86 19 90 21 M86 26 C88 20 92 20 95 23 M91 28 C94 23 98 24 99 28"/>
         </g>
-        <!-- Pressure point at intersection -->
-        <circle cx="60" cy="35" r="6" fill="#C2410C" opacity="0.8" class="anim-pulse"/>
-        <!-- Rotation indicator arc -->
-        <path d="M70 55 Q85 40 70 25" fill="none" stroke="#0A0A0A" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+        <path class="motion-guide" d="M111 52 C108 71 98 86 82 94 M89 94 L81 95 L85 87"/>
       </svg>`,
 
-      doorwayPec: `<svg viewBox="0 0 100 100">
-        <!-- Doorway pec stretch: arm against doorframe, stepping through -->
-        <!-- Doorframe (vertical) -->
-        <line x1="70" y1="10" x2="70" y2="90" stroke="#E5E5E5" stroke-width="6"/>
-        <!-- Person's body (vertical torso) -->
-        <g class="anim-step-forward">
-          <line x1="45" y1="45" x2="45" y2="75" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Head -->
-          <circle cx="45" cy="35" r="8" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
-          <!-- Arm at 90° against doorframe -->
-          <!-- Upper arm horizontal -->
-          <line x1="45" y1="48" x2="70" y2="48" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Forearm vertical (90°) -->
-          <line x1="70" y1="48" x2="70" y2="28" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Elbow point -->
-          <circle cx="70" cy="48" r="3" fill="#C2410C"/>
-          <!-- Legs (stepping forward) -->
-          <line x1="45" y1="75" x2="38" y2="90" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round"/>
-          <line x1="45" y1="75" x2="55" y2="90" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round"/>
+      doorwayPec: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+        <path class="sketch-light" d="M124 10 L124 150 M129 10 L129 150 M124 12 L148 12"/>
+        <path class="sketch-hatch" d="M130 23 L137 16 M130 34 L141 23 M130 46 L141 35 M130 58 L141 47 M130 70 L141 59 M130 82 L141 71 M130 94 L141 83 M130 106 L141 95"/>
+        <path d="M101 66 C109 59 116 56 124 58 M124 58 C127 58 130 60 131 63 M124 58 L124 31 C124 26 127 23 131 24 M127 31 C127 25 130 22 133 25 M129 35 C131 29 134 29 136 32"/>
+        <g class="motion-pec">
+          <path class="sketch-wash" d="M58 60 C71 53 89 55 101 66 C108 78 109 96 105 112 L57 112 C52 94 50 75 58 60 Z"/>
+          <path d="M58 60 C71 53 89 55 101 66 C108 78 109 96 105 112 M57 112 C52 94 50 75 58 60"/>
+          <path d="M69 55 L66 45 M91 55 L93 46"/>
+          <path class="sketch-wash" d="M66 22 C72 13 84 11 93 17 C103 24 104 38 97 47 C91 54 80 56 72 50 C63 44 61 31 66 22 Z"/>
+          <path d="M66 22 C72 13 84 11 93 17 C103 24 104 38 97 47 C91 54 80 56 72 50 C63 44 61 31 66 22 Z"/>
+          <path class="sketch-mid" d="M90 28 C94 28 97 30 99 33 M91 36 L98 37 M90 44 C93 44 95 43 97 41"/>
+          <path d="M58 65 C48 76 43 91 43 108 C43 121 39 136 32 147 M104 109 C111 121 117 134 123 147 M57 111 C62 123 67 136 70 147"/>
+          <path class="sketch-mid" d="M65 70 C74 78 87 80 99 75 M61 83 C75 90 92 91 106 84"/>
+          <path class="sketch-hatch" d="M93 61 L101 75 M89 63 L99 79 M85 65 L96 82"/>
         </g>
-        <!-- Step direction arrow -->
-        <path d="M30 60 L20 60" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M23 57 L20 60 L23 63" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path class="motion-guide" d="M51 125 C42 123 34 119 28 113 M32 120 L27 113 L36 112"/>
       </svg>`,
 
-      chinTuckNod: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Lying flat with small head lift -->
-        <!-- Ground/floor line -->
-        <line x1="10" y1="70" x2="90" y2="70" stroke="#E5E5E5" stroke-width="3" stroke-linecap="round"/>
-        <!-- Body lying flat (horizontal line) -->
-        <line x1="35" y1="65" x2="85" y2="65" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Head with slight lift -->
-        <g class="anim-lift-head" style="transform-origin: 25px 65px">
-          <circle cx="25" cy="60" r="12" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
-          <!-- Small lift indicator -->
-          <line x1="25" y1="70" x2="25" y2="62" stroke="#C2410C" stroke-width="2" stroke-linecap="round"/>
+      chinTuckNod: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+        <path class="sketch-light" d="M12 127 C48 125 104 126 149 127 M18 131 C57 129 108 130 145 131"/>
+        <path class="sketch-wash" d="M73 91 C91 82 119 85 137 98 L146 119 L66 119 C62 108 64 98 73 91 Z"/>
+        <path d="M68 117 C64 108 64 99 73 92 C91 82 119 85 137 98 C142 104 145 111 147 119"/>
+        <path class="sketch-mid" d="M83 98 C100 101 120 101 138 98 M77 108 C99 111 126 111 143 107"/>
+        <path d="M112 118 C122 121 130 124 138 128"/>
+        <g class="motion-nod">
+          <path class="sketch-wash" d="M31 87 C38 76 51 72 62 77 C72 81 77 92 74 102 C71 112 62 119 51 119 C39 119 29 111 27 100 C26 95 28 90 31 87 Z"/>
+          <path d="M31 87 C38 76 51 72 62 77 C72 81 77 92 74 102 C71 112 62 119 51 119 C39 119 29 111 27 100 C26 95 28 90 31 87 Z"/>
+          <path d="M73 95 C78 97 80 101 75 104 L70 106"/>
+          <path class="sketch-mid" d="M65 91 C69 89 72 90 74 92 M66 100 L72 101 M62 109 C66 111 69 110 71 108"/>
+          <path class="sketch-hatch" d="M35 83 L43 77 M31 88 L42 79 M31 108 L39 116 M38 112 L44 118"/>
+          <path d="M66 116 C69 118 72 119 77 119"/>
         </g>
-        <!-- 1-2cm label area -->
-        <text x="25" y="85" font-size="8" fill="#A3A3A3" text-anchor="middle" font-family="Inter, sans-serif">1-2cm</text>
-        <!-- Upward arrow indicator -->
-        <path d="M10 55 L10 45" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M7 48 L10 45 L13 48" stroke="#C2410C" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path class="motion-guide" d="M45 134 L45 121 M40 127 L45 121 L50 127"/>
       </svg>`,
 
-      wallAngels: `<svg viewBox="0 0 100 100">
-        <!-- Abstract: Vertical lines with sliding horizontal elements -->
-        <!-- Background vertical lines (wall) -->
-        <line x1="30" y1="15" x2="30" y2="85" stroke="#E5E5E5" stroke-width="1"/>
-        <line x1="50" y1="15" x2="50" y2="85" stroke="#E5E5E5" stroke-width="1"/>
-        <line x1="70" y1="15" x2="70" y2="85" stroke="#E5E5E5" stroke-width="1"/>
-        <!-- Sliding horizontal elements -->
-        <g class="anim-slide-up" style="transform-origin: 50px 50px">
-          <line x1="20" y1="35" x2="80" y2="35" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
-          <line x1="25" y1="50" x2="75" y2="50" stroke="#525252" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-          <line x1="30" y1="65" x2="70" y2="65" stroke="#A3A3A3" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+      wallAngels: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+        <path class="sketch-light" d="M20 13 L20 148 M52 13 L52 148 M108 13 L108 148 M140 13 L140 148"/>
+        <path class="sketch-hatch" d="M21 28 L29 20 M21 43 L30 34 M21 58 L30 49 M130 30 L139 21 M130 45 L139 36 M130 60 L139 51"/>
+        <path class="sketch-wash" d="M59 67 C66 59 72 57 80 57 C89 57 96 61 102 68 L105 120 C101 135 96 145 94 149 L66 149 C63 139 58 130 56 120 Z"/>
+        <path d="M59 68 C66 60 72 57 80 57 C89 57 96 61 102 68 M59 68 L56 120 C59 132 64 141 66 149 M102 68 L105 120 C102 132 97 141 94 149"/>
+        <path class="sketch-wash" d="M65 21 C69 12 79 9 87 13 C96 17 100 28 96 37 C93 47 87 53 80 54 C71 52 65 45 63 36 C61 31 62 25 65 21 Z"/>
+        <path d="M65 21 C69 12 79 9 87 13 C96 17 100 28 96 37 C93 47 87 53 80 54 C71 52 65 45 63 36 C61 31 62 25 65 21 Z"/>
+        <path class="sketch-mid" d="M68 29 C74 34 87 35 94 29 M69 40 C75 44 86 45 92 40 M69 65 C74 75 87 76 97 66 M64 88 C73 93 88 94 99 88 M61 111 C72 116 90 117 102 111"/>
+        <path class="sketch-hatch" d="M68 67 L75 79 M64 73 L72 84 M92 69 L86 82 M97 73 L89 86"/>
+        <g class="motion-angel-left">
+          <path class="sketch-wash" d="M59 70 C49 69 42 72 36 79 L26 94 C23 99 16 99 13 95 C10 91 12 87 15 83 L29 64 C37 54 48 49 62 51 Z"/>
+          <path d="M59 70 C49 69 42 72 36 79 L26 94 C23 99 16 99 13 95 C10 91 12 87 15 83 L29 64 C37 54 48 49 62 51"/>
+          <path d="M14 84 L14 53 C14 47 17 43 21 43 C25 43 27 47 27 52 L27 91"/>
+          <path class="sketch-mid" d="M17 50 L24 50 M17 57 L24 57"/>
         </g>
-        <!-- Movement indicators -->
-        <circle cx="20" cy="35" r="3" fill="#C2410C"/>
-        <circle cx="80" cy="35" r="3" fill="#C2410C"/>
-        <!-- Arrow indicators -->
-        <path d="M15 45 L15 25" stroke="#0A0A0A" stroke-width="1" opacity="0.4"/>
-        <path d="M85 45 L85 25" stroke="#0A0A0A" stroke-width="1" opacity="0.4"/>
+        <g class="motion-angel-right">
+          <path class="sketch-wash" d="M101 70 C111 69 118 72 124 79 L134 94 C137 99 144 99 147 95 C150 91 148 87 145 83 L131 64 C123 54 112 49 98 51 Z"/>
+          <path d="M101 70 C111 69 118 72 124 79 L134 94 C137 99 144 99 147 95 C150 91 148 87 145 83 L131 64 C123 54 112 49 98 51"/>
+          <path d="M146 84 L146 53 C146 47 143 43 139 43 C135 43 133 47 133 52 L133 91"/>
+          <path class="sketch-mid" d="M136 50 L143 50 M136 57 L143 57"/>
+        </g>
+        <path class="motion-guide" d="M8 76 C5 57 8 38 18 24 M12 30 L18 23 L20 33 M152 76 C155 57 152 38 142 24 M148 30 L142 23 L140 33"/>
       </svg>`
     };
 
