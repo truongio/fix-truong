@@ -282,14 +282,15 @@
 
     /* Exercise Illustration */
     .illustration {
-      width: 152px;
-      height: 152px;
+      width: 168px;
+      height: 168px;
       margin-bottom: 24px;
       opacity: 1;
-      --sketch-ink: #555854;
-      --sketch-mid: #858883;
-      --sketch-light: #B8BAB5;
-      --sketch-wash: #E8E8E4;
+      --sketch-ink: #46515A;
+      --sketch-mid: #7B8992;
+      --sketch-light: #B7C1C6;
+      --sketch-wash: #E9EEF0;
+      --sketch-shade: #DCE5E8;
     }
 
     .illustration svg {
@@ -304,7 +305,7 @@
     .illustration polyline,
     .illustration polygon {
       stroke: var(--sketch-ink);
-      stroke-width: 1.15;
+      stroke-width: 0.92;
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
@@ -314,6 +315,13 @@
     .illustration .sketch-wash {
       fill: var(--sketch-wash);
       stroke: none;
+      opacity: 0.72;
+    }
+
+    .illustration .sketch-shade {
+      fill: var(--sketch-shade);
+      stroke: none;
+      opacity: 0.72;
     }
 
     .illustration .sketch-mid {
@@ -328,15 +336,27 @@
 
     .illustration .sketch-hatch {
       stroke: var(--sketch-mid);
-      stroke-width: 0.55;
-      opacity: 0.62;
+      stroke-width: 0.46;
+      opacity: 0.58;
+    }
+
+    .illustration .sketch-detail {
+      stroke: var(--sketch-ink);
+      stroke-width: 0.48;
+      opacity: 0.82;
+    }
+
+    .illustration .sketch-echo {
+      stroke: var(--sketch-light);
+      stroke-width: 0.42;
+      opacity: 0.82;
     }
 
     .illustration .motion-guide {
       stroke: var(--sketch-light);
-      stroke-width: 0.8;
-      stroke-dasharray: 2.5 3;
-      opacity: 0.9;
+      stroke-width: 0.62;
+      stroke-dasharray: 1 3;
+      opacity: 0.62;
     }
 
     .illustration .sketch-breathe {
@@ -1752,63 +1772,89 @@
     const illustrations = {
       chinTucks: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
         <path class="sketch-wash" d="M51 146 C54 121 61 101 77 91 C91 82 111 85 122 99 C132 112 135 130 137 146 Z"/>
+        <path class="sketch-shade" d="M54 145 C58 122 66 106 79 98 C91 91 103 92 112 98 C97 104 87 116 82 145 Z"/>
         <path d="M49 146 C52 123 60 102 76 92 C87 85 99 84 111 89 C127 96 135 119 137 146"/>
         <path class="sketch-mid" d="M66 111 C79 116 92 117 105 112 M63 122 C78 127 96 128 114 121"/>
+        <path class="sketch-detail" d="M75 98 C84 103 98 104 109 99 M69 131 C81 136 98 138 116 132 M72 140 C88 144 104 145 121 139"/>
+        <path class="sketch-echo" d="M47 145 C50 121 58 101 74 90 M139 145 C137 118 128 96 112 87"/>
         <g class="motion-chin-tuck">
           <path class="sketch-wash" d="M69 36 C73 21 86 13 101 15 C118 18 128 32 127 48 C127 59 122 66 116 72 C113 76 113 84 116 91 C102 96 87 94 77 87 C80 79 77 73 72 67 C67 59 66 47 69 36 Z"/>
+          <path class="sketch-shade" d="M69 38 C72 23 84 15 99 15 C87 23 82 35 82 49 C82 67 91 82 103 93 C92 94 83 91 77 87 C80 78 76 72 72 66 C68 58 66 47 69 38 Z"/>
           <path d="M69 36 C73 21 86 13 101 15 C118 18 128 32 127 48 C127 55 124 61 119 66 L113 71 C111 75 112 83 116 91"/>
           <path d="M69 36 C66 47 68 59 73 67 C78 73 80 79 77 87"/>
           <path d="M126 43 C132 46 133 51 127 54 L123 56 C122 61 119 65 114 68"/>
           <path class="sketch-mid" d="M112 39 C116 37 120 38 122 40 M116 49 C118 50 121 50 123 49 M114 60 C117 62 120 62 122 60"/>
-          <path class="sketch-hatch" d="M77 30 L84 24 M75 35 L84 27 M75 65 L82 70 M79 72 L86 76 M88 88 L94 92"/>
+          <path class="sketch-detail" d="M71 34 C77 20 89 13 102 15 M72 38 C79 28 88 22 101 20 M105 38 C110 35 116 35 121 38 M123 47 C126 48 128 49 129 51 M119 57 C121 58 123 58 125 57"/>
+          <path class="sketch-hatch" d="M76 27 L85 20 M73 32 L86 22 M72 38 L84 27 M73 65 L82 70 M76 70 L85 76 M81 77 L89 82 M87 87 L95 92"/>
+          <path class="sketch-echo" d="M67 35 C71 19 85 11 101 13 M68 67 C73 73 77 79 74 87"/>
         </g>
         <path class="motion-guide" d="M132 77 C119 77 107 77 96 77 M101 73 L95 77 L101 81"/>
       </svg>`,
 
       neckCircles: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
         <path class="sketch-wash" d="M31 148 C35 119 49 101 68 95 L92 95 C112 101 126 119 130 148 Z"/>
+        <path class="sketch-shade" d="M32 148 C37 124 49 107 68 99 C75 108 85 112 96 108 C84 119 79 134 78 148 Z"/>
         <path d="M30 148 C35 120 49 103 68 96 M92 96 C112 103 126 120 131 148 M67 95 C71 105 89 105 93 95"/>
         <path class="sketch-mid" d="M48 116 C66 123 94 123 112 116 M42 132 C65 138 96 138 119 132"/>
+        <path class="sketch-detail" d="M61 101 C67 112 73 119 80 123 C88 118 95 110 99 101 M79 123 L80 146 M75 126 L72 140 M85 126 L88 140"/>
+        <path class="sketch-echo" d="M28 148 C33 119 47 101 66 94 M133 148 C128 117 113 100 94 94"/>
         <g class="motion-neck-circle">
           <path class="sketch-wash" d="M57 35 C60 20 69 12 80 12 C94 12 103 23 104 39 L101 64 C98 76 91 86 80 88 C69 86 62 76 59 64 Z"/>
+          <path class="sketch-shade" d="M57 38 C59 22 68 13 80 12 C73 23 71 37 73 51 C75 67 82 79 91 84 C87 87 83 88 80 88 C69 86 62 76 59 64 Z"/>
           <path d="M57 36 C59 21 68 12 80 12 C94 12 102 23 104 39 M104 39 L101 63 C98 76 91 86 80 88 C69 86 62 76 59 63 L57 36"/>
           <path d="M56 42 C51 45 52 54 58 56 M104 42 C109 45 108 54 102 56"/>
           <path class="sketch-mid" d="M68 43 C72 40 76 40 78 42 M82 42 C86 40 90 40 93 43 M79 45 L78 57 L82 59 M73 68 C77 71 84 71 88 68"/>
-          <path class="sketch-hatch" d="M62 28 L69 21 M60 34 L69 24 M98 30 L102 36 M96 70 L91 77 M64 69 L69 77"/>
+          <path class="sketch-detail" d="M59 34 C63 21 71 14 81 12 M61 37 C67 27 76 21 88 20 M54 48 C56 47 57 49 57 52 M103 48 C105 47 106 49 104 52 M66 88 C70 91 75 92 80 92 C85 92 90 91 94 88"/>
+          <path class="sketch-hatch" d="M61 27 L69 19 M59 32 L70 21 M58 38 L69 26 M99 27 L104 35 M98 32 L103 39 M97 69 L91 78 M94 74 L88 81 M63 69 L69 78 M65 75 L72 82"/>
+          <path class="sketch-echo" d="M55 35 C58 19 68 10 80 10 M106 39 L103 64 C100 77 92 87 81 90"/>
           <path d="M69 85 L68 96 M91 85 L92 96"/>
         </g>
-        <path class="motion-guide" d="M49 31 C39 52 41 76 56 89 M46 82 L56 90 L55 78 M111 31 C121 52 119 76 104 89"/>
+        <path class="motion-guide" d="M49 31 C39 52 41 76 56 89 M48 84 L56 90 L55 80 M111 31 C121 52 119 76 104 89"/>
       </svg>`,
 
       upperTrap: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
         <path class="sketch-wash" d="M38 147 C40 119 51 102 69 94 C84 88 102 93 116 104 C126 114 130 131 131 147 Z"/>
+        <path class="sketch-shade" d="M39 147 C42 124 51 108 66 100 C71 111 78 119 84 122 C77 132 74 140 73 147 Z"/>
         <path d="M37 147 C40 120 50 104 69 95 C84 88 103 93 117 104 C127 115 130 132 131 147"/>
         <path d="M60 108 C67 115 75 119 82 121 C94 117 103 111 110 103"/>
-        <path class="sketch-hatch" d="M54 108 L67 123 M58 104 L71 119 M63 101 L75 116 M101 106 L91 119"/>
+        <path class="sketch-detail" d="M70 97 C76 104 79 112 82 121 M64 101 C69 112 75 120 82 126 M82 126 C92 120 101 112 107 102 M48 126 C62 132 77 135 92 134"/>
+        <path class="sketch-hatch" d="M52 108 L65 124 M55 105 L69 122 M59 102 L72 119 M63 100 L76 116 M99 106 L90 120 M103 105 L94 119 M107 104 L98 117"/>
+        <path class="sketch-echo" d="M35 147 C38 118 49 101 68 92 M133 147 C131 130 127 115 118 102"/>
         <path d="M53 111 C45 122 43 135 45 146 M45 146 C40 143 37 140 35 135"/>
         <g class="motion-side-bend">
           <path class="sketch-wash" d="M61 30 C65 17 76 11 88 14 C102 17 111 29 109 43 L104 66 C101 78 94 86 83 88 C72 84 66 75 63 64 Z"/>
+          <path class="sketch-shade" d="M61 31 C65 18 76 11 88 14 C78 22 75 36 76 50 C77 66 84 79 94 84 C90 87 86 88 83 88 C72 84 66 75 63 64 Z"/>
           <path d="M61 31 C65 17 76 11 88 14 C102 17 111 29 109 43 L104 66 C101 78 94 86 83 88 C72 84 66 75 63 64 Z"/>
           <path class="sketch-mid" d="M75 41 C78 39 82 39 84 41 M93 42 C96 41 99 42 101 44 M87 43 L85 55 L89 57 M78 66 C83 69 89 70 94 67"/>
           <path d="M72 84 L69 96 M95 83 L101 96"/>
           <path d="M51 70 C47 61 50 52 58 47 C66 41 73 34 79 28"/>
           <path d="M79 28 C82 24 86 24 88 28 M78 30 C79 24 82 21 86 22 M82 27 C83 21 87 20 90 23 M87 28 C89 23 93 23 95 26"/>
+          <path class="sketch-detail" d="M63 30 C68 19 78 13 89 14 M64 36 C72 26 81 22 94 22 M50 68 C53 71 56 72 59 71 M54 48 C58 48 61 51 62 55 M82 28 C84 30 87 31 90 31"/>
+          <path class="sketch-hatch" d="M64 27 L72 20 M62 32 L74 22 M61 38 L73 27 M65 65 L73 71 M68 70 L77 76 M72 76 L81 82"/>
+          <path class="sketch-echo" d="M59 30 C63 15 76 8 89 12 M108 66 C104 79 96 88 84 91"/>
         </g>
         <path class="motion-guide" d="M113 39 C119 55 115 72 103 83 M109 80 L103 84 L102 76"/>
       </svg>`,
 
       levatorScap: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
         <path class="sketch-wash" d="M34 147 C37 122 48 104 66 96 C85 87 108 95 121 111 C128 121 130 134 131 147 Z"/>
+        <path class="sketch-shade" d="M68 96 C81 91 96 93 108 101 C97 112 88 126 82 147 L53 147 C57 126 61 109 68 96 Z"/>
         <path d="M33 147 C37 121 48 104 66 96 C85 88 108 95 121 111 C128 121 130 135 131 147"/>
         <path class="sketch-mid" d="M48 119 C67 128 91 130 113 119 M44 134 C67 141 99 141 123 133"/>
-        <path class="sketch-hatch" d="M94 98 L77 124 M99 100 L83 126 M104 103 L88 128 M109 106 L94 129"/>
+        <path class="sketch-detail" d="M69 96 C76 104 81 114 83 126 M83 126 C92 116 99 106 104 99 M83 126 L82 146 M52 113 C62 119 72 122 83 123"/>
+        <path class="sketch-hatch" d="M91 96 L74 123 M95 97 L78 125 M99 99 L82 127 M103 101 L86 129 M107 103 L90 130 M111 106 L95 131"/>
+        <path class="sketch-echo" d="M31 147 C34 120 46 101 65 93 M133 147 C131 130 127 119 122 109"/>
         <g class="motion-levator">
           <path class="sketch-wash" d="M57 32 C63 18 74 13 87 16 C101 20 109 33 106 47 C103 60 96 70 85 78 C75 78 65 72 59 62 C54 53 53 41 57 32 Z"/>
+          <path class="sketch-shade" d="M57 32 C63 18 74 13 87 16 C77 24 73 36 74 49 C75 62 82 71 91 74 C89 76 87 77 85 78 C75 78 65 72 59 62 C54 53 53 41 57 32 Z"/>
           <path d="M57 32 C63 18 74 13 87 16 C101 20 109 33 106 47 C103 60 96 70 85 78 C75 78 65 72 59 62 C54 53 53 41 57 32 Z"/>
           <path class="sketch-mid" d="M66 38 C70 36 74 37 77 39 M87 43 C91 43 94 45 96 48 M79 42 L75 52 L78 56 M70 60 C75 64 81 66 86 65"/>
           <path d="M70 73 L66 96 M91 74 L96 96"/>
           <path d="M49 70 C44 61 47 51 55 46 C65 38 75 31 83 24"/>
           <path d="M82 25 C85 21 90 21 92 24 M80 28 C82 22 86 19 90 21 M86 26 C88 20 92 20 95 23 M91 28 C94 23 98 24 99 28"/>
+          <path class="sketch-detail" d="M59 31 C65 19 75 14 87 16 M60 37 C68 27 78 22 92 23 M48 68 C51 71 55 72 58 70 M55 46 C59 47 62 50 63 54 M84 25 C87 28 90 29 94 29"/>
+          <path class="sketch-hatch" d="M60 28 L68 21 M58 34 L70 23 M57 40 L69 28 M60 60 L69 67 M63 66 L72 73 M68 72 L77 78"/>
+          <path class="sketch-echo" d="M55 31 C61 16 74 10 88 14 M104 60 C100 70 93 77 85 81"/>
         </g>
         <path class="motion-guide" d="M111 52 C108 71 98 86 82 94 M89 94 L81 95 L85 87"/>
       </svg>`,
@@ -1817,16 +1863,22 @@
         <path class="sketch-light" d="M124 10 L124 150 M129 10 L129 150 M124 12 L148 12"/>
         <path class="sketch-hatch" d="M130 23 L137 16 M130 34 L141 23 M130 46 L141 35 M130 58 L141 47 M130 70 L141 59 M130 82 L141 71 M130 94 L141 83 M130 106 L141 95"/>
         <path d="M101 66 C109 59 116 56 124 58 M124 58 C127 58 130 60 131 63 M124 58 L124 31 C124 26 127 23 131 24 M127 31 C127 25 130 22 133 25 M129 35 C131 29 134 29 136 32"/>
+        <path class="sketch-detail" d="M104 64 C111 62 117 62 124 64 M120 58 C123 61 125 64 126 68 M127 42 C130 43 133 43 135 41"/>
+        <path class="sketch-echo" d="M122 9 L122 151 M131 10 L131 150"/>
         <g class="motion-pec">
           <path class="sketch-wash" d="M58 60 C71 53 89 55 101 66 C108 78 109 96 105 112 L57 112 C52 94 50 75 58 60 Z"/>
+          <path class="sketch-shade" d="M89 57 C94 59 98 62 101 66 C107 77 109 91 106 104 C97 98 91 88 88 77 C86 68 86 62 89 57 Z"/>
           <path d="M58 60 C71 53 89 55 101 66 C108 78 109 96 105 112 M57 112 C52 94 50 75 58 60"/>
           <path d="M69 55 L66 45 M91 55 L93 46"/>
           <path class="sketch-wash" d="M66 22 C72 13 84 11 93 17 C103 24 104 38 97 47 C91 54 80 56 72 50 C63 44 61 31 66 22 Z"/>
+          <path class="sketch-shade" d="M66 22 C72 13 84 11 93 17 C83 21 77 30 78 40 C79 47 83 52 89 54 C82 56 76 54 72 50 C63 44 61 31 66 22 Z"/>
           <path d="M66 22 C72 13 84 11 93 17 C103 24 104 38 97 47 C91 54 80 56 72 50 C63 44 61 31 66 22 Z"/>
           <path class="sketch-mid" d="M90 28 C94 28 97 30 99 33 M91 36 L98 37 M90 44 C93 44 95 43 97 41"/>
           <path d="M58 65 C48 76 43 91 43 108 C43 121 39 136 32 147 M104 109 C111 121 117 134 123 147 M57 111 C62 123 67 136 70 147"/>
           <path class="sketch-mid" d="M65 70 C74 78 87 80 99 75 M61 83 C75 90 92 91 106 84"/>
-          <path class="sketch-hatch" d="M93 61 L101 75 M89 63 L99 79 M85 65 L96 82"/>
+          <path class="sketch-detail" d="M68 19 C75 13 85 12 93 17 M67 24 C75 18 84 17 95 20 M57 61 C64 67 71 71 78 72 M78 72 C88 71 95 68 101 64 M57 94 C72 101 90 102 107 96 M48 116 C52 123 57 128 63 131"/>
+          <path class="sketch-hatch" d="M95 59 L103 73 M92 60 L101 76 M89 62 L99 79 M86 64 L97 82 M83 67 L94 85 M57 78 L65 85 M55 83 L64 90"/>
+          <path class="sketch-echo" d="M64 21 C71 11 84 9 94 15 M55 59 C48 76 48 94 54 112 M106 111 C114 123 120 135 126 146"/>
         </g>
         <path class="motion-guide" d="M51 125 C42 123 34 119 28 113 M32 120 L27 113 L36 112"/>
       </svg>`,
@@ -1834,40 +1886,58 @@
       chinTuckNod: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
         <path class="sketch-light" d="M12 127 C48 125 104 126 149 127 M18 131 C57 129 108 130 145 131"/>
         <path class="sketch-wash" d="M73 91 C91 82 119 85 137 98 L146 119 L66 119 C62 108 64 98 73 91 Z"/>
+        <path class="sketch-shade" d="M73 91 C84 86 99 84 112 87 C101 94 95 105 94 119 L66 119 C62 108 64 98 73 91 Z"/>
         <path d="M68 117 C64 108 64 99 73 92 C91 82 119 85 137 98 C142 104 145 111 147 119"/>
         <path class="sketch-mid" d="M83 98 C100 101 120 101 138 98 M77 108 C99 111 126 111 143 107"/>
+        <path class="sketch-detail" d="M71 94 C80 99 89 103 98 105 M71 114 C88 117 108 118 127 116 M98 88 C103 99 107 109 109 119"/>
+        <path class="sketch-echo" d="M66 118 C61 108 62 98 72 90 M148 118 C146 109 142 101 136 96"/>
         <path d="M112 118 C122 121 130 124 138 128"/>
         <g class="motion-nod">
           <path class="sketch-wash" d="M31 87 C38 76 51 72 62 77 C72 81 77 92 74 102 C71 112 62 119 51 119 C39 119 29 111 27 100 C26 95 28 90 31 87 Z"/>
+          <path class="sketch-shade" d="M31 87 C38 76 51 72 62 77 C51 81 45 89 45 99 C45 108 50 115 58 118 C55 119 53 119 51 119 C39 119 29 111 27 100 C26 95 28 90 31 87 Z"/>
           <path d="M31 87 C38 76 51 72 62 77 C72 81 77 92 74 102 C71 112 62 119 51 119 C39 119 29 111 27 100 C26 95 28 90 31 87 Z"/>
           <path d="M73 95 C78 97 80 101 75 104 L70 106"/>
           <path class="sketch-mid" d="M65 91 C69 89 72 90 74 92 M66 100 L72 101 M62 109 C66 111 69 110 71 108"/>
-          <path class="sketch-hatch" d="M35 83 L43 77 M31 88 L42 79 M31 108 L39 116 M38 112 L44 118"/>
+          <path class="sketch-detail" d="M33 84 C41 76 52 73 62 77 M32 89 C41 81 51 78 64 80 M73 98 C76 99 77 101 76 103 M67 115 C70 116 73 117 76 118"/>
+          <path class="sketch-hatch" d="M35 81 L43 76 M31 86 L43 78 M29 91 L41 81 M29 107 L38 115 M33 110 L42 117 M38 112 L46 119"/>
+          <path class="sketch-echo" d="M29 85 C37 73 51 69 63 75 M26 100 C28 112 39 121 51 121"/>
           <path d="M66 116 C69 118 72 119 77 119"/>
         </g>
         <path class="motion-guide" d="M45 134 L45 121 M40 127 L45 121 L50 127"/>
       </svg>`,
 
       wallAngels: `<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
-        <path class="sketch-light" d="M20 13 L20 148 M52 13 L52 148 M108 13 L108 148 M140 13 L140 148"/>
+        <path class="sketch-light" d="M20 13 L20 148 M52 13 L52 148 M108 13 L108 148 M140 13 L140 148" opacity=".42"/>
         <path class="sketch-hatch" d="M21 28 L29 20 M21 43 L30 34 M21 58 L30 49 M130 30 L139 21 M130 45 L139 36 M130 60 L139 51"/>
         <path class="sketch-wash" d="M59 67 C66 59 72 57 80 57 C89 57 96 61 102 68 L105 120 C101 135 96 145 94 149 L66 149 C63 139 58 130 56 120 Z"/>
+        <path class="sketch-shade" d="M59 67 C65 61 72 58 80 57 C71 74 68 95 70 116 C71 130 75 141 78 149 L66 149 C63 139 58 130 56 120 Z"/>
         <path d="M59 68 C66 60 72 57 80 57 C89 57 96 61 102 68 M59 68 L56 120 C59 132 64 141 66 149 M102 68 L105 120 C102 132 97 141 94 149"/>
         <path class="sketch-wash" d="M65 21 C69 12 79 9 87 13 C96 17 100 28 96 37 C93 47 87 53 80 54 C71 52 65 45 63 36 C61 31 62 25 65 21 Z"/>
+        <path class="sketch-shade" d="M65 21 C69 12 79 9 87 13 C79 19 76 28 77 37 C78 44 82 50 87 52 C85 53 82 54 80 54 C71 52 65 45 63 36 C61 31 62 25 65 21 Z"/>
         <path d="M65 21 C69 12 79 9 87 13 C96 17 100 28 96 37 C93 47 87 53 80 54 C71 52 65 45 63 36 C61 31 62 25 65 21 Z"/>
         <path class="sketch-mid" d="M68 29 C74 34 87 35 94 29 M69 40 C75 44 86 45 92 40 M69 65 C74 75 87 76 97 66 M64 88 C73 93 88 94 99 88 M61 111 C72 116 90 117 102 111"/>
-        <path class="sketch-hatch" d="M68 67 L75 79 M64 73 L72 84 M92 69 L86 82 M97 73 L89 86"/>
+        <path class="sketch-detail" d="M65 20 C72 12 80 10 88 13 M65 25 C72 18 82 16 92 19 M80 56 L80 146 M75 62 C72 76 70 89 70 102 M85 62 C89 77 91 91 91 104 M63 80 C68 84 73 86 80 87 C87 86 94 83 99 79"/>
+        <path class="sketch-hatch" d="M67 67 L74 79 M64 70 L72 84 M62 75 L70 88 M93 68 L86 82 M96 71 L88 86 M99 75 L91 89 M73 101 L79 111 M77 99 L83 110"/>
+        <path class="sketch-echo" d="M57 67 C64 57 72 55 80 55 M104 67 L108 120 C105 134 99 144 96 150"/>
         <g class="motion-angel-left">
           <path class="sketch-wash" d="M59 70 C49 69 42 72 36 79 L26 94 C23 99 16 99 13 95 C10 91 12 87 15 83 L29 64 C37 54 48 49 62 51 Z"/>
+          <path class="sketch-shade" d="M59 70 C49 69 42 72 36 79 L26 94 C23 99 16 99 13 95 C20 89 26 79 31 69 C37 58 47 52 61 52 Z"/>
           <path d="M59 70 C49 69 42 72 36 79 L26 94 C23 99 16 99 13 95 C10 91 12 87 15 83 L29 64 C37 54 48 49 62 51"/>
           <path d="M14 84 L14 53 C14 47 17 43 21 43 C25 43 27 47 27 52 L27 91"/>
-          <path class="sketch-mid" d="M17 50 L24 50 M17 57 L24 57"/>
+          <path class="sketch-mid" d="M17 50 L24 50 M17 57 L24 57 M19 46 C21 44 23 45 24 47"/>
+          <path class="sketch-detail" d="M58 61 C49 59 41 63 35 72 M32 76 C29 82 26 87 22 91 M18 49 L18 79 M21 48 L21 79 M24 49 L24 78"/>
+          <path class="sketch-hatch" d="M48 55 L54 67 M44 57 L50 69 M40 60 L46 72 M28 75 L34 80"/>
+          <path class="sketch-echo" d="M61 49 C46 47 35 53 27 63 M12 83 L12 52 C12 45 16 41 21 41"/>
         </g>
         <g class="motion-angel-right">
           <path class="sketch-wash" d="M101 70 C111 69 118 72 124 79 L134 94 C137 99 144 99 147 95 C150 91 148 87 145 83 L131 64 C123 54 112 49 98 51 Z"/>
+          <path class="sketch-shade" d="M101 70 C111 69 118 72 124 79 L134 94 C137 99 144 99 147 95 C140 89 134 79 129 69 C123 58 113 52 99 52 Z"/>
           <path d="M101 70 C111 69 118 72 124 79 L134 94 C137 99 144 99 147 95 C150 91 148 87 145 83 L131 64 C123 54 112 49 98 51"/>
           <path d="M146 84 L146 53 C146 47 143 43 139 43 C135 43 133 47 133 52 L133 91"/>
-          <path class="sketch-mid" d="M136 50 L143 50 M136 57 L143 57"/>
+          <path class="sketch-mid" d="M136 50 L143 50 M136 57 L143 57 M136 47 C137 45 139 44 141 46"/>
+          <path class="sketch-detail" d="M102 61 C111 59 119 63 125 72 M128 76 C131 82 134 87 138 91 M142 49 L142 79 M139 48 L139 79 M136 49 L136 78"/>
+          <path class="sketch-hatch" d="M112 55 L106 67 M116 57 L110 69 M120 60 L114 72 M132 75 L126 80"/>
+          <path class="sketch-echo" d="M99 49 C114 47 125 53 133 63 M148 83 L148 52 C148 45 144 41 139 41"/>
         </g>
         <path class="motion-guide" d="M8 76 C5 57 8 38 18 24 M12 30 L18 23 L20 33 M152 76 C155 57 152 38 142 24 M148 30 L142 23 L140 33"/>
       </svg>`
