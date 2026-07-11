@@ -298,6 +298,14 @@
       height: 100%;
     }
 
+    .illustration video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      display: block;
+    }
+
     .illustration line,
     .illustration circle,
     .illustration path,
@@ -531,22 +539,199 @@
     .illustration .scene-cheek { fill: #D98072; stroke: none; opacity: .32; }
     .illustration .scene-ink,
     .illustration circle[fill="#465047"] { fill: var(--scene-ink); stroke: none; }
-    .illustration .scene-motion { fill: none; stroke: #738D7A; stroke-width: .8; stroke-dasharray: 2 4; opacity: .48; }
+
+    /* Monochrome technical-pen treatment inspired by architectural field sketches */
+    .illustration {
+      --draw-ink: #41413E;
+      --draw-mid: #777772;
+      --draw-light: #B8B8B2;
+      --draw-paper: #FBFAF6;
+      --draw-wash: #F1F0EB;
+      --draw-wash-deep: #E4E3DD;
+      --ease-human: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .illustration .scene-bg,
+    .illustration .scene-cream,
+    .illustration .scene-white {
+      fill: var(--draw-paper);
+      stroke: none;
+    }
+
+    .illustration .scene-sky {
+      fill: var(--draw-paper);
+      stroke: var(--draw-light);
+      stroke-width: .55;
+      stroke-dasharray: 1.5 1.1;
+    }
+
+    .illustration .scene-sky-deep {
+      fill: url(#hatchSoft);
+      stroke: var(--draw-mid);
+      stroke-width: .55;
+    }
+
+    .illustration .scene-sun {
+      fill: none;
+      stroke: var(--draw-mid);
+      stroke-width: .7;
+    }
+
+    .illustration .scene-leaf {
+      fill: url(#hatchSoft);
+      stroke: var(--draw-ink);
+      stroke-width: .72;
+    }
+
+    .illustration .scene-leaf-dark {
+      fill: url(#hatchCross);
+      stroke: var(--draw-ink);
+      stroke-width: .78;
+    }
+
+    .illustration .scene-wood,
+    .illustration .scene-mat {
+      fill: url(#hatchSoft);
+      stroke: var(--draw-ink);
+      stroke-width: .72;
+    }
+
+    .illustration .scene-skin {
+      fill: var(--draw-paper);
+      stroke: var(--draw-ink);
+      stroke-width: .62;
+    }
+
+    .illustration .scene-skin-shadow {
+      fill: url(#hatchSoft);
+      stroke: none;
+      opacity: .78;
+    }
+
+    .illustration .scene-hair {
+      fill: url(#hatchDense);
+      stroke: var(--draw-ink);
+      stroke-width: .85;
+    }
+
+    .illustration .scene-shirt {
+      fill: url(#hatchSoft);
+      stroke: var(--draw-ink);
+      stroke-width: .72;
+    }
+
+    .illustration .scene-shirt-light {
+      fill: var(--draw-wash);
+      stroke: var(--draw-light);
+      stroke-width: .45;
+      opacity: .72;
+    }
+
+    .illustration .scene-pants {
+      fill: url(#hatchCross);
+      stroke: var(--draw-ink);
+      stroke-width: .78;
+    }
+
+    .illustration .scene-shadow {
+      fill: var(--draw-wash-deep);
+      stroke: none;
+      opacity: .62;
+    }
+
+    .illustration .scene-line,
+    .illustration .scene-detail,
+    .illustration .scene-soft-line {
+      stroke: var(--draw-ink);
+    }
+
+    .illustration .scene-line {
+      stroke-width: .86;
+    }
+
+    .illustration .scene-detail {
+      stroke-width: .48;
+      opacity: .8;
+    }
+
+    .illustration .scene-soft-line {
+      stroke-width: .42;
+      opacity: .36;
+    }
+
+    .illustration .scene-cheek {
+      fill: none;
+      stroke: var(--draw-light);
+      stroke-width: .4;
+      opacity: .58;
+    }
+
+    .illustration .scene-ink,
+    .illustration circle[fill="#465047"] {
+      fill: var(--draw-ink);
+      stroke: none;
+    }
+
+    .illustration .hand-hatch {
+      fill: none;
+      stroke: var(--draw-mid);
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .illustration .hand-hatch-soft { stroke-width: .36; opacity: .32; }
+    .illustration .hand-hatch-dense { stroke-width: .42; opacity: .48; }
+    .illustration .hand-hatch-cross { stroke-width: .34; opacity: .36; }
+
+    .illustration .scene-motion {
+      stroke: var(--draw-mid);
+    }
+    .illustration .scene-motion {
+      fill: none;
+      stroke: var(--draw-mid);
+      stroke-width: .8;
+      stroke-dasharray: 2 4;
+      opacity: .48;
+      animation: story-guide 4.4s var(--ease-human) infinite;
+    }
+    .illustration .guide-neck { animation-duration: 7.2s; }
+    .illustration .guide-trap { animation-duration: 5.6s; }
+    .illustration .guide-levator { animation-duration: 6.2s; }
+    .illustration .guide-pec { animation-duration: 6.2s; }
+    .illustration .guide-nod { animation-duration: 4.8s; }
+    .illustration .guide-angel { animation-duration: 6.4s; }
 
     .illustration .ambient-cloud { animation: story-cloud 8s ease-in-out infinite; }
     .illustration .ambient-leaf-left { animation: story-leaf-left 4.6s ease-in-out infinite; transform-box: fill-box; transform-origin: right bottom; }
     .illustration .ambient-leaf-right { animation: story-leaf-right 5.2s ease-in-out infinite; transform-box: fill-box; transform-origin: left bottom; }
-    .illustration .ambient-hair { animation: story-hair 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: top center; }
-    .illustration .ambient-breathe { animation: story-breathe 3.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+    .illustration .ambient-hair { animation: story-hair 6.4s var(--ease-human) infinite; transform-box: fill-box; transform-origin: top center; }
+    .illustration .ambient-breathe { animation: story-breathe 4.6s var(--ease-human) infinite; transform-box: fill-box; transform-origin: center bottom; }
 
-    .illustration .motion-chin-tuck { animation: story-chin-tuck 3.8s var(--ease-in-out-expo) infinite; }
-    .illustration .motion-neck-circle { animation: story-neck-circle 6s ease-in-out infinite; }
-    .illustration .motion-side-bend { animation: story-side-bend 4.8s var(--ease-in-out-expo) infinite; }
-    .illustration .motion-levator { animation: story-levator 4.8s var(--ease-in-out-expo) infinite; }
-    .illustration .motion-pec { animation: story-pec 4.8s var(--ease-in-out-expo) infinite; }
-    .illustration .motion-nod { animation: story-nod 4s var(--ease-in-out-expo) infinite; }
-    .illustration .motion-angel-left { animation: story-angel-left 5s var(--ease-in-out-expo) infinite; }
-    .illustration .motion-angel-right { animation: story-angel-right 5s var(--ease-in-out-expo) infinite; }
+    .illustration .motion-chin-tuck { animation: story-chin-tuck 4.4s var(--ease-human) infinite; }
+    .illustration .motion-neck-circle { animation: story-neck-circle 7.2s var(--ease-human) infinite; }
+    .illustration .motion-side-bend { animation: story-side-bend 5.6s var(--ease-human) infinite; }
+    .illustration .motion-levator { animation: story-levator 6.2s var(--ease-human) infinite; }
+    .illustration .motion-pec { animation: story-pec 6.2s var(--ease-human) infinite; }
+    .illustration .motion-nod { animation: story-nod 4.8s var(--ease-human) infinite; }
+    .illustration .motion-angel-left { animation: story-angel-left 6.4s var(--ease-human) infinite; }
+    .illustration .motion-angel-right { animation: story-angel-right 6.4s var(--ease-human) .08s infinite; }
+    .illustration .motion-secondary-chin { animation: story-secondary-chin 4.4s var(--ease-human) .12s infinite; }
+    .illustration .motion-secondary-neck { animation: story-secondary-neck 7.2s var(--ease-human) .1s infinite; }
+    .illustration .motion-secondary-trap { animation: story-secondary-trap 5.6s var(--ease-human) infinite; }
+    .illustration .motion-secondary-levator { animation: story-secondary-levator 6.2s var(--ease-human) infinite; }
+    .illustration .motion-secondary-pec { animation: story-secondary-pec 6.2s var(--ease-human) infinite; }
+    .illustration .motion-secondary-nod { animation: story-secondary-nod 4.8s var(--ease-human) .14s infinite; }
+    .illustration .motion-secondary-angel { animation: story-secondary-angel 6.4s var(--ease-human) infinite; }
+    .illustration .motion-trap-assist { animation: story-trap-assist 5.6s var(--ease-human) .14s infinite; }
+    .illustration .motion-trap-hand { animation: story-trap-hand 5.6s var(--ease-human) .2s infinite; }
+    .illustration .motion-levator-assist { animation: story-levator-assist 6.2s var(--ease-human) .18s infinite; }
+    .illustration .motion-levator-hand { animation: story-levator-hand 6.2s var(--ease-human) .24s infinite; }
+    .illustration .motion-pec-legs { animation: story-pec-legs 6.2s var(--ease-human) infinite; }
+    .illustration .motion-pec-torso { animation: story-pec-torso 6.2s var(--ease-human) .12s infinite; }
+    .illustration .motion-pec-free-arm { animation: story-pec-free-arm 6.2s var(--ease-human) .16s infinite; }
+    .illustration .motion-pec-head { animation: story-pec-head 6.2s var(--ease-human) .2s infinite; }
+    .illustration .motion-angel-forearm-left { animation: story-angel-forearm-left 6.4s var(--ease-human) .08s infinite; }
+    .illustration .motion-angel-forearm-right { animation: story-angel-forearm-right 6.4s var(--ease-human) .16s infinite; }
 
     .illustration .motion-chin-tuck,
     .illustration .motion-neck-circle,
@@ -556,17 +741,45 @@
     .illustration .motion-nod,
     .illustration .motion-angel-left,
     .illustration .motion-angel-right {
-      transform-box: fill-box;
+      transform-box: view-box;
     }
 
-    .illustration .motion-chin-tuck { transform-origin: center bottom; }
-    .illustration .motion-neck-circle { transform-origin: 50% 90%; }
-    .illustration .motion-side-bend { transform-origin: 48% 92%; }
-    .illustration .motion-levator { transform-origin: 45% 92%; }
-    .illustration .motion-pec { transform-origin: left bottom; }
-    .illustration .motion-nod { transform-origin: 85% 85%; }
-    .illustration .motion-angel-left { transform-origin: right bottom; }
-    .illustration .motion-angel-right { transform-origin: left bottom; }
+    .illustration [class*="motion-secondary-"],
+    .illustration .motion-trap-assist,
+    .illustration .motion-trap-hand,
+    .illustration .motion-levator-assist,
+    .illustration .motion-levator-hand,
+    .illustration [class*="motion-pec-"],
+    .illustration .motion-angel-forearm-left,
+    .illustration .motion-angel-forearm-right {
+      transform-box: view-box;
+    }
+
+    .illustration .motion-chin-tuck { transform-origin: 112px 112px; }
+    .illustration .motion-neck-circle { transform-origin: 120px 132px; }
+    .illustration .motion-side-bend { transform-origin: 124px 135px; }
+    .illustration .motion-levator { transform-origin: 119px 135px; }
+    .illustration .motion-pec { transform-origin: 92px 218px; }
+    .illustration .motion-nod { transform-origin: 104px 168px; }
+    .illustration .motion-angel-left { transform-origin: 90px 96px; }
+    .illustration .motion-angel-right { transform-origin: 153px 96px; }
+    .illustration .motion-secondary-chin,
+    .illustration .motion-secondary-nod { transform-origin: 120px 176px; }
+    .illustration .motion-secondary-neck,
+    .illustration .motion-secondary-trap,
+    .illustration .motion-secondary-levator,
+    .illustration .motion-secondary-angel { transform-origin: 120px 135px; }
+    .illustration .motion-secondary-pec { transform-origin: 155px 95px; }
+    .illustration .motion-trap-assist { transform-origin: 93px 122px; }
+    .illustration .motion-trap-hand { transform-origin: 111px 61px; }
+    .illustration .motion-levator-assist { transform-origin: 96px 125px; }
+    .illustration .motion-levator-hand { transform-origin: 114px 65px; }
+    .illustration .motion-pec-legs { transform-origin: 92px 218px; }
+    .illustration .motion-pec-torso { transform-origin: 100px 164px; }
+    .illustration .motion-pec-free-arm { transform-origin: 75px 95px; }
+    .illustration .motion-pec-head { transform-origin: 119px 95px; }
+    .illustration .motion-angel-forearm-left { transform-origin: 43px 134px; }
+    .illustration .motion-angel-forearm-right { transform-origin: 200px 134px; }
 
     @keyframes story-cloud {
       0%, 100% { transform: translateX(-2px); }
@@ -584,71 +797,191 @@
     }
 
     @keyframes story-hair {
-      0%, 100% { transform: rotate(-1deg) translateX(0); }
-      50% { transform: rotate(2deg) translateX(1px); }
+      0%, 18%, 72%, 100% { transform: rotate(0deg) translateX(0); }
+      38% { transform: rotate(.35deg) translateX(.25px); }
+      88% { transform: rotate(-.25deg) translateX(-.15px); }
     }
 
     @keyframes story-breathe {
       0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(1.018); }
+      48% { transform: scaleY(1.008); }
+    }
+
+    @keyframes story-guide {
+      0%, 10%, 100% { opacity: .16; stroke-dashoffset: 18; }
+      30% { opacity: .72; stroke-dashoffset: 8; }
+      52%, 72% { opacity: .9; stroke-dashoffset: 0; }
+      88% { opacity: .28; stroke-dashoffset: -8; }
     }
 
     @keyframes story-chin-tuck {
-      0%, 16%, 100% { transform: translate(0, 0) rotate(0); }
-      42%, 72% { transform: translate(-7px, 1px) rotate(-1deg); }
+      0%, 18%, 100% { transform: translate(0, 0) rotate(0deg); }
+      40%, 72% { transform: translate(-5px, .5px) rotate(-.65deg); }
+      88% { transform: translate(-1px, .1px) rotate(-.1deg); }
     }
 
     @keyframes story-neck-circle {
       0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      22% { transform: translate(-4px, 3px) rotate(-10deg); }
-      48% { transform: translate(0, 7px) rotate(0deg); }
-      74% { transform: translate(4px, 3px) rotate(10deg); }
+      12% { transform: translate(-1.5px, .5px) rotate(-3deg); }
+      24% { transform: translate(-3.3px, 2.5px) rotate(-7.5deg); }
+      38% { transform: translate(-2.2px, 4.6px) rotate(-4.5deg); }
+      50% { transform: translate(0, 5.5px) rotate(0deg); }
+      62% { transform: translate(2.2px, 4.6px) rotate(4.5deg); }
+      76% { transform: translate(3.3px, 2.5px) rotate(7.5deg); }
+      88% { transform: translate(1.5px, .5px) rotate(3deg); }
     }
 
     @keyframes story-side-bend {
-      0%, 16%, 100% { transform: rotate(0deg); }
-      44%, 74% { transform: rotate(11deg); }
+      0%, 18%, 100% { transform: translate(0, 0) rotate(0deg); }
+      42%, 74% { transform: translate(.5px, .7px) rotate(8.5deg); }
+      90% { transform: translate(0, 0) rotate(1deg); }
     }
 
     @keyframes story-levator {
       0%, 16%, 100% { transform: translate(0, 0) rotate(0deg); }
-      44%, 74% { transform: translate(-3px, 4px) rotate(13deg); }
+      27% { transform: translate(-.8px, .8px) rotate(3deg); }
+      46%, 74% { transform: translate(-2.5px, 3.5px) rotate(8.5deg); }
+      90% { transform: translate(-.5px, .5px) rotate(1.5deg); }
     }
 
     @keyframes story-pec {
-      0%, 16%, 100% { transform: translateX(0) rotate(0deg); }
-      44%, 74% { transform: translateX(-8px) rotate(-2deg); }
+      0%, 20%, 100% { transform: translate(0, 0) rotate(0deg); }
+      45%, 75% { transform: translate(-3.5px, 0) rotate(-1deg); }
+      90% { transform: translate(-.7px, 0) rotate(-.15deg); }
     }
 
     @keyframes story-nod {
-      0%, 16%, 100% { transform: translateY(0) rotate(0deg); }
-      44%, 72% { transform: translateY(-5px) rotate(-6deg); }
+      0%, 16%, 100% { transform: translate(0, 0) rotate(0deg); }
+      30% { transform: translate(-1.6px, 0) rotate(-.8deg); }
+      48%, 70% { transform: translate(-1.6px, -3px) rotate(-3.2deg); }
+      84% { transform: translate(-1.6px, 0) rotate(-.8deg); }
+      94% { transform: translate(-.3px, 0) rotate(0deg); }
     }
 
     @keyframes story-angel-left {
-      0%, 16%, 100% { transform: translateY(0) rotate(0deg); }
-      46%, 74% { transform: translateY(-13px) rotate(-17deg); }
+      0%, 20%, 100% { transform: rotate(0deg); }
+      50%, 75% { transform: rotate(-10deg); }
+      92% { transform: rotate(-1.5deg); }
     }
 
     @keyframes story-angel-right {
-      0%, 16%, 100% { transform: translateY(0) rotate(0deg); }
-      46%, 74% { transform: translateY(-13px) rotate(17deg); }
+      0%, 20%, 100% { transform: rotate(0deg); }
+      50%, 75% { transform: rotate(10deg); }
+      92% { transform: rotate(1.5deg); }
+    }
+
+    @keyframes story-secondary-chin {
+      0%, 20%, 100% { transform: translateX(0); }
+      42%, 72% { transform: translateX(-1.3px); }
+    }
+
+    @keyframes story-secondary-neck {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      24% { transform: translate(-1.8px, 1.4px) rotate(-4deg); }
+      50% { transform: translate(0, 3px) rotate(0deg); }
+      76% { transform: translate(1.8px, 1.4px) rotate(4deg); }
+    }
+
+    @keyframes story-secondary-trap {
+      0%, 20%, 100% { transform: translateY(0); }
+      42%, 74% { transform: translateY(1px); }
+    }
+
+    @keyframes story-secondary-levator {
+      0%, 22%, 100% { transform: translateY(0); }
+      46%, 74% { transform: translateY(1px); }
+    }
+
+    @keyframes story-secondary-pec {
+      0%, 24%, 100% { transform: rotate(0deg); }
+      47%, 75% { transform: rotate(2deg); }
+    }
+
+    @keyframes story-secondary-nod {
+      0%, 30%, 100% { transform: translateY(0); }
+      50%, 70% { transform: translateY(-1.2px); }
+    }
+
+    @keyframes story-secondary-angel {
+      0%, 20%, 100% { transform: translateY(0); }
+      30%, 75% { transform: translateY(1px); }
+    }
+
+    @keyframes story-trap-assist {
+      0%, 20%, 100% { transform: rotate(0deg); }
+      44%, 72% { transform: rotate(2.5deg); }
+      88% { transform: rotate(.4deg); }
+    }
+
+    @keyframes story-trap-hand {
+      0%, 28%, 100% { transform: translateY(0) scale(1); }
+      46%, 70% { transform: translateY(.7px) scale(.992); }
+    }
+
+    @keyframes story-levator-assist {
+      0%, 24%, 100% { transform: rotate(0deg); }
+      48%, 72% { transform: rotate(2.5deg); }
+      88% { transform: rotate(.4deg); }
+    }
+
+    @keyframes story-levator-hand {
+      0%, 30%, 100% { transform: translateY(0) scale(1); }
+      50%, 70% { transform: translateY(.7px) scale(.992); }
+    }
+
+    @keyframes story-pec-legs {
+      0%, 16%, 100% { transform: translateX(0); }
+      34%, 75% { transform: translateX(-1.2px); }
+      92% { transform: translateX(-.2px); }
+    }
+
+    @keyframes story-pec-torso {
+      0%, 22%, 100% { transform: translateX(0) rotate(0deg); }
+      46%, 75% { transform: translateX(-1.5px) rotate(-.5deg); }
+    }
+
+    @keyframes story-pec-free-arm {
+      0%, 24%, 100% { transform: rotate(0deg); }
+      48%, 75% { transform: rotate(-1.3deg); }
+    }
+
+    @keyframes story-pec-head {
+      0%, 26%, 100% { transform: translateX(0) rotate(0deg); }
+      50%, 75% { transform: translateX(-1px) rotate(-.35deg); }
+    }
+
+    @keyframes story-angel-forearm-left {
+      0%, 22%, 100% { transform: translate(0, 0) rotate(0deg); }
+      52%, 74% { transform: translate(0, -9px) rotate(10deg); }
+      92% { transform: translate(0, -1px) rotate(1deg); }
+    }
+
+    @keyframes story-angel-forearm-right {
+      0%, 22%, 100% { transform: translate(0, 0) rotate(0deg); }
+      52%, 74% { transform: translate(0, -9px) rotate(-10deg); }
+      92% { transform: translate(0, -1px) rotate(-1deg); }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .illustration [class*="ambient-"],
-      .illustration [class*="motion-"] {
+      .illustration [class*="motion-"],
+      .illustration .scene-motion {
         animation: none !important;
       }
 
-      .illustration .motion-chin-tuck { transform: translate(-7px, 1px); }
-      .illustration .motion-neck-circle { transform: translate(0, 7px); }
-      .illustration .motion-side-bend { transform: rotate(11deg); }
-      .illustration .motion-levator { transform: translate(-3px, 4px) rotate(13deg); }
-      .illustration .motion-pec { transform: translateX(-8px) rotate(-2deg); }
-      .illustration .motion-nod { transform: translateY(-5px) rotate(-6deg); }
-      .illustration .motion-angel-left { transform: translateY(-13px) rotate(-17deg); }
-      .illustration .motion-angel-right { transform: translateY(-13px) rotate(17deg); }
+      .illustration .scene-motion { opacity: .46; stroke-dashoffset: 0; }
+      .illustration .motion-chin-tuck { transform: translate(-4px, .4px) rotate(-.5deg); }
+      .illustration .motion-neck-circle { transform: translate(0, 3px); }
+      .illustration .motion-side-bend { transform: translate(.4px, .5px) rotate(6deg); }
+      .illustration .motion-levator { transform: translate(-1.8px, 2.5px) rotate(6deg); }
+      .illustration .motion-pec { transform: translate(-2.5px, 0) rotate(-.7deg); }
+      .illustration .motion-nod { transform: translate(-1px, -2px) rotate(-2deg); }
+      .illustration .motion-angel-left { transform: rotate(-7deg); }
+      .illustration .motion-angel-right { transform: rotate(7deg); }
+      .illustration .motion-trap-assist,
+      .illustration .motion-levator-assist { transform: rotate(2deg); }
+      .illustration .motion-angel-forearm-left { transform: translateY(-6px) rotate(7deg); }
+      .illustration .motion-angel-forearm-right { transform: translateY(-6px) rotate(-7deg); }
     }
 
     @keyframes breathe {
@@ -1949,9 +2282,21 @@
   </div>
 
   <script>
-    // Layered hand-painted storybook scenes for each exercise
+    const handDrawnDefs = `<defs>
+      <pattern id="hatchSoft" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+        <path class="hand-hatch hand-hatch-soft" d="M-2 7 L7 -2 M4 10 L10 4"/>
+      </pattern>
+      <pattern id="hatchDense" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(4)">
+        <path class="hand-hatch hand-hatch-dense" d="M-2 5 L5 -2 M2 8 L8 2"/>
+      </pattern>
+      <pattern id="hatchCross" width="8" height="8" patternUnits="userSpaceOnUse">
+        <path class="hand-hatch hand-hatch-cross" d="M-2 8 L8 -2 M1 -1 L9 7"/>
+      </pattern>
+    </defs>`;
+
+    // Animated monochrome technical-pen scenes for each exercise
     const illustrations = {
-      chinTucks: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      chinTucks: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">${handDrawnDefs}
         <path class="scene-sky" d="M24 39 C51 11 104 9 145 21 C195 35 222 74 216 124 C210 177 174 218 119 221 C69 224 25 196 18 151 C12 112 4 63 24 39 Z"/>
         <g class="ambient-cloud" opacity=".68">
           <ellipse class="scene-white" cx="60" cy="55" rx="26" ry="10"/><ellipse class="scene-white" cx="82" cy="51" rx="18" ry="13"/>
@@ -1968,6 +2313,8 @@
           <path class="scene-shirt-light" d="M79 126 C90 118 102 116 112 117 C102 134 98 158 101 185 H70 C69 158 71 138 79 126 Z" opacity=".58"/>
           <path class="scene-line" d="M78 126 C91 115 113 112 133 120 C151 128 162 150 164 185 M70 185 C69 158 71 138 78 126"/>
           <path class="scene-detail" d="M80 139 C98 147 124 148 145 139 M76 158 C100 165 135 165 156 155"/>
+        </g>
+        <g class="motion-secondary-chin">
           <path class="scene-skin" d="M125 119 C126 108 127 99 133 91 L107 88 C108 101 106 111 101 117 Z"/>
           <path class="scene-skin-shadow" d="M111 91 C113 103 111 112 107 117 L101 117 C106 107 108 99 107 88 Z"/>
         </g>
@@ -1983,10 +2330,10 @@
           <path class="scene-detail" d="M142 58 C147 56 151 57 154 60 M151 66 C156 67 159 70 159 73 M145 86 C149 88 153 87 156 84 M135 61 C138 63 140 64 142 64"/>
           <circle class="scene-ink" cx="148" cy="61" r="1.5" fill="#465047"/>
         </g>
-        <path class="scene-motion" d="M174 105 C154 108 139 109 122 108 M128 103 L121 108 L129 112"/>
+        <path class="scene-motion guide-chin" d="M174 105 C154 108 139 109 122 108 M128 103 L121 108 L129 112"/>
       </svg>`,
 
-      neckCircles: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      neckCircles: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">${handDrawnDefs}
         <path class="scene-sky" d="M19 74 C31 28 77 14 121 17 C175 19 220 46 222 101 C224 155 192 211 126 222 C72 230 24 199 17 154 C13 127 11 104 19 74 Z"/>
         <circle class="scene-sun" cx="52" cy="55" r="21"/>
         <g class="ambient-cloud"><ellipse class="scene-white" cx="153" cy="52" rx="34" ry="12"/><ellipse class="scene-white" cx="178" cy="48" rx="22" ry="15"/></g>
@@ -1998,6 +2345,8 @@
           <path class="scene-shirt-light" d="M62 151 C75 136 90 130 103 128 C94 150 91 181 95 214 H48 C48 188 52 165 62 151 Z" opacity=".58"/>
           <path class="scene-line" d="M62 151 C77 131 99 124 121 126 C145 125 169 134 181 153 C189 167 194 191 194 214 M48 214 C48 188 52 165 62 151"/>
           <path class="scene-detail" d="M67 163 C92 174 146 174 176 161 M57 187 C89 198 157 199 187 185"/>
+        </g>
+        <g class="motion-secondary-neck">
           <path class="scene-skin" d="M104 130 L106 111 H136 L139 130 C129 142 114 142 104 130 Z"/>
         </g>
         <g class="motion-neck-circle">
@@ -2008,16 +2357,16 @@
           <path class="scene-detail" d="M99 74 C105 69 112 69 117 73 M132 73 C138 69 145 71 149 76 M122 75 L120 91 L125 95 M108 107 C118 114 132 114 142 106"/>
           <circle cx="110" cy="75" r="1.7" fill="#465047"/><circle cx="141" cy="75" r="1.7" fill="#465047"/><ellipse class="scene-cheek" cx="101" cy="94" rx="8" ry="4"/><ellipse class="scene-cheek" cx="148" cy="94" rx="8" ry="4"/>
         </g>
-        <path class="scene-motion" d="M75 49 C54 79 56 116 82 140 M73 133 L83 141 L81 128 M171 50 C190 82 187 117 164 140"/>
+        <path class="scene-motion guide-neck" d="M75 49 C54 79 56 116 82 140 M73 133 L83 141 L81 128 M171 50 C190 82 187 117 164 140"/>
       </svg>`,
 
-      upperTrap: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      upperTrap: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">${handDrawnDefs}
         <path class="scene-sky" d="M20 54 C43 17 96 10 143 19 C193 28 222 66 219 117 C217 173 179 218 119 222 C65 225 25 197 17 151 C11 116 4 79 20 54 Z"/>
         <path class="scene-wood" d="M31 176 H206 V187 H31 Z M47 187 H58 V221 H47 Z M181 187 H192 V221 H181 Z"/>
         <g class="ambient-leaf-left"><path class="scene-line" d="M31 176 C27 139 35 102 54 71"/><ellipse class="scene-leaf" cx="35" cy="134" rx="12" ry="23" transform="rotate(-25 35 134)"/><ellipse class="scene-leaf-dark" cx="50" cy="101" rx="11" ry="21" transform="rotate(28 50 101)"/><ellipse class="scene-leaf" cx="61" cy="77" rx="9" ry="18" transform="rotate(43 61 77)"/></g>
         <g class="ambient-cloud"><ellipse class="scene-white" cx="174" cy="47" rx="31" ry="11"/><ellipse class="scene-white" cx="197" cy="44" rx="18" ry="13"/></g>
         <ellipse class="scene-shadow" cx="127" cy="219" rx="78" ry="9"/>
-        <g class="ambient-breathe">
+        <g class="ambient-breathe motion-secondary-trap">
           <path class="scene-shirt" d="M75 134 C91 119 112 115 132 120 C155 126 171 146 174 176 H65 C64 158 67 143 75 134 Z"/>
           <path class="scene-shirt-light" d="M75 134 C84 126 95 121 105 120 C96 135 93 157 96 176 H65 C64 158 67 143 75 134 Z" opacity=".55"/>
           <path class="scene-line" d="M75 134 C91 119 112 115 132 120 C155 126 171 146 174 176 M65 176 C64 158 67 143 75 134"/>
@@ -2034,22 +2383,26 @@
           <path class="scene-line" d="M86 57 C94 38 111 29 129 32 C149 35 161 52 159 72 L155 102 C152 120 140 132 124 135 C107 132 94 121 89 104 Z"/>
           <path class="scene-detail" d="M102 75 C107 71 113 72 117 75 M133 75 C138 72 144 74 148 78 M119 77 L118 91 L123 95 M107 108 C116 114 130 114 140 107"/>
           <circle cx="110" cy="76" r="1.6" fill="#465047"/><circle cx="141" cy="77" r="1.6" fill="#465047"/><ellipse class="scene-cheek" cx="102" cy="96" rx="7" ry="4"/><ellipse class="scene-cheek" cx="147" cy="96" rx="7" ry="4"/>
-          <path class="scene-skin" d="M77 125 C68 112 67 99 73 88 C80 75 93 65 105 54 L113 62 C104 75 93 85 89 96 C86 105 91 113 98 120 Z"/>
-          <path class="scene-line" d="M77 125 C68 112 67 99 73 88 C80 75 93 65 105 54 M113 62 C104 75 93 85 89 96 C86 105 91 113 98 120"/>
-          <path class="scene-skin" d="M103 55 C106 48 111 43 117 40 C121 39 124 42 122 46 C126 43 130 46 128 50 C132 48 135 52 132 55 C135 55 137 59 133 62 C125 65 118 64 111 61 Z"/>
-          <path class="scene-detail" d="M109 57 C114 54 119 50 122 46 M115 60 C120 57 125 53 128 50 M121 62 C126 59 130 57 132 54"/>
         </g>
-        <path class="scene-motion" d="M175 61 C184 87 177 113 160 130 M168 127 L159 132 L161 122"/>
+          <g class="motion-trap-assist">
+            <path class="scene-skin" d="M77 125 C68 112 67 99 73 88 C80 75 93 65 105 54 L113 62 C104 75 93 85 89 96 C86 105 91 113 98 120 Z"/>
+            <path class="scene-line" d="M77 125 C68 112 67 99 73 88 C80 75 93 65 105 54 M113 62 C104 75 93 85 89 96 C86 105 91 113 98 120"/>
+            <g class="motion-trap-hand">
+              <path class="scene-skin" d="M103 55 C106 48 111 43 117 40 C121 39 124 42 122 46 C126 43 130 46 128 50 C132 48 135 52 132 55 C135 55 137 59 133 62 C125 65 118 64 111 61 Z"/>
+              <path class="scene-detail" d="M109 57 C114 54 119 50 122 46 M115 60 C120 57 125 53 128 50 M121 62 C126 59 130 57 132 54"/>
+            </g>
+          </g>
+        <path class="scene-motion guide-trap" d="M175 61 C184 87 177 113 160 130 M168 127 L159 132 L161 122"/>
       </svg>`,
 
-      levatorScap: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      levatorScap: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">${handDrawnDefs}
         <path class="scene-sky" d="M19 61 C35 21 82 10 127 17 C181 23 218 57 220 109 C222 166 185 214 124 222 C71 229 26 201 18 155 C12 122 6 88 19 61 Z"/>
         <path class="scene-white" d="M34 48 H95 V132 H34 Z" opacity=".82"/><path class="scene-wood" d="M31 45 H99 V51 H31 Z M93 45 H99 V136 H93 Z" opacity=".72"/>
         <g class="ambient-cloud"><ellipse class="scene-sky-deep" cx="61" cy="78" rx="24" ry="8" opacity=".55"/><ellipse class="scene-sky-deep" cx="78" cy="74" rx="15" ry="10" opacity=".55"/></g>
         <g class="ambient-leaf-right"><path class="scene-line" d="M204 214 C196 184 184 156 168 137"/><ellipse class="scene-leaf" cx="194" cy="184" rx="11" ry="21" transform="rotate(35 194 184)"/><ellipse class="scene-leaf-dark" cx="178" cy="153" rx="10" ry="19" transform="rotate(-29 178 153)"/></g>
         <path class="scene-wood" d="M39 177 H195 V187 H39 Z M52 187 H62 V220 H52 Z M174 187 H184 V220 H174 Z"/>
         <ellipse class="scene-shadow" cx="121" cy="219" rx="79" ry="9"/>
-        <g class="ambient-breathe">
+        <g class="ambient-breathe motion-secondary-levator">
           <path class="scene-shirt" d="M73 136 C91 119 112 116 133 121 C154 126 171 147 174 177 H64 C64 158 67 144 73 136 Z"/>
           <path class="scene-shirt-light" d="M73 136 C83 127 93 122 104 120 C95 141 93 159 96 177 H64 C64 158 67 144 73 136 Z" opacity=".55"/>
           <path class="scene-line" d="M73 136 C91 119 112 116 133 121 C154 126 171 147 174 177 M64 177 C64 158 67 144 73 136"/>
@@ -2063,15 +2416,19 @@
           <path class="scene-line" d="M82 61 C92 42 110 33 128 37 C147 41 158 58 155 77 L149 105 C145 121 134 133 119 135 C103 131 91 120 86 105 Z"/>
           <path class="scene-detail" d="M97 78 C102 74 108 75 112 78 M126 82 C131 79 137 81 141 85 M113 81 L109 93 L114 97 M101 109 C111 115 124 117 135 111"/>
           <circle cx="105" cy="79" r="1.6" fill="#465047"/><circle cx="134" cy="84" r="1.6" fill="#465047"/><ellipse class="scene-cheek" cx="98" cy="99" rx="7" ry="4"/>
-          <path class="scene-skin" d="M73 128 C65 115 65 102 72 91 C79 79 94 69 108 58 L116 67 C106 78 95 88 91 99 C88 108 92 117 100 123 Z"/>
-          <path class="scene-line" d="M73 128 C65 115 65 102 72 91 C79 79 94 69 108 58 M116 67 C106 78 95 88 91 99 C88 108 92 117 100 123"/>
-          <path class="scene-skin" d="M106 59 C111 51 117 46 124 44 C128 44 130 47 128 50 C132 48 135 51 133 55 C137 53 140 57 137 60 C140 61 141 65 137 68 C128 70 120 68 114 65 Z"/>
-          <path class="scene-detail" d="M113 62 C118 58 124 54 128 50 M119 65 C124 61 130 58 133 55 M126 67 C131 64 135 62 137 60"/>
         </g>
-        <path class="scene-motion" d="M170 83 C167 109 152 132 130 143 M140 143 L129 145 L135 135"/>
+          <g class="motion-levator-assist">
+            <path class="scene-skin" d="M73 128 C65 115 65 102 72 91 C79 79 94 69 108 58 L116 67 C106 78 95 88 91 99 C88 108 92 117 100 123 Z"/>
+            <path class="scene-line" d="M73 128 C65 115 65 102 72 91 C79 79 94 69 108 58 M116 67 C106 78 95 88 91 99 C88 108 92 117 100 123"/>
+            <g class="motion-levator-hand">
+              <path class="scene-skin" d="M106 59 C111 51 117 46 124 44 C128 44 130 47 128 50 C132 48 135 51 133 55 C137 53 140 57 137 60 C140 61 141 65 137 68 C128 70 120 68 114 65 Z"/>
+              <path class="scene-detail" d="M113 62 C118 58 124 54 128 50 M119 65 C124 61 130 58 133 55 M126 67 C131 64 135 62 137 60"/>
+            </g>
+          </g>
+        <path class="scene-motion guide-levator" d="M170 83 C167 109 152 132 130 143 M140 143 L129 145 L135 135"/>
       </svg>`,
 
-      doorwayPec: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      doorwayPec: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">${handDrawnDefs}
         <path class="scene-sky" d="M20 42 C47 13 93 11 133 19 C181 28 218 61 220 111 C223 168 186 213 129 222 C73 231 28 201 18 157 C10 121 5 68 20 42 Z"/>
         <circle class="scene-sun" cx="57" cy="50" r="20"/>
         <g class="ambient-cloud"><ellipse class="scene-white" cx="80" cy="76" rx="28" ry="10"/><ellipse class="scene-white" cx="101" cy="72" rx="17" ry="12"/></g>
@@ -2081,31 +2438,31 @@
         <path class="scene-detail" d="M155 51 H216 M155 86 H216 M155 121 H216 M155 156 H216 M155 191 H216" opacity=".35"/>
         <g class="ambient-leaf-right" opacity=".55"><path class="scene-shirt-light" d="M160 31 C184 53 191 84 183 114 C179 128 171 140 160 148 Z"/><path class="scene-soft-line" d="M161 39 C179 66 181 106 162 138"/></g>
         <ellipse class="scene-shadow" cx="113" cy="221" rx="78" ry="9"/>
-        <g>
+        <g class="motion-secondary-pec">
           <path class="scene-skin" d="M136 102 C144 93 150 87 155 88 L158 101 C153 106 147 111 140 115 Z"/>
           <path class="scene-skin" d="M155 101 L155 58 C155 50 160 45 166 46 C171 47 173 53 172 61 L171 102 Z"/>
           <path class="scene-line" d="M136 102 C144 93 150 87 155 88 M155 88 L155 58 C155 50 160 45 166 46 C171 47 173 53 172 61 L171 102"/>
           <path class="scene-detail" d="M160 55 C164 52 168 53 171 56 M160 64 H171 M160 72 H171"/>
         </g>
         <g class="motion-pec">
-          <path class="scene-pants" d="M77 163 C89 158 110 157 124 164 L141 218 H111 L100 181 L93 218 H62 Z"/>
-          <path class="scene-line" d="M77 163 C89 158 110 157 124 164 L141 218 M111 218 L100 181 L93 218 M62 218 L77 163"/>
-          <path class="scene-shirt" d="M70 91 C83 78 104 75 123 82 C140 89 148 108 146 134 C144 149 137 160 124 166 C107 171 84 168 72 158 C66 137 64 111 70 91 Z"/>
-          <path class="scene-shirt-light" d="M70 91 C81 81 93 78 104 79 C95 103 94 137 101 167 C89 166 79 163 72 158 C66 137 64 111 70 91 Z" opacity=".55"/>
-          <path class="scene-line" d="M70 91 C83 78 104 75 123 82 C140 89 148 108 146 134 C144 149 137 160 124 166 C107 171 84 168 72 158 C66 137 64 111 70 91 Z"/>
-          <path class="scene-detail" d="M75 105 C94 115 125 115 141 104 M70 129 C94 139 126 139 145 127 M74 151 C93 159 121 160 137 151"/>
-          <path class="scene-skin" d="M73 93 C62 105 57 122 58 141 C59 158 53 178 43 193 C39 199 40 205 46 208 C52 210 57 206 60 201 C72 182 77 162 76 143 C76 127 82 117 90 108 Z"/>
-          <path class="scene-line" d="M73 93 C62 105 57 122 58 141 C59 158 53 178 43 193 C39 199 40 205 46 208 C52 210 57 206 60 201 C72 182 77 162 76 143 C76 127 82 117 90 108"/>
-          <path class="scene-skin" d="M80 45 C88 30 103 23 119 27 C136 31 147 46 145 64 C143 79 133 91 119 95 C103 95 90 87 83 74 C77 64 76 54 80 45 Z"/>
-          <path class="scene-skin-shadow" d="M80 46 C87 32 99 25 112 26 C103 39 101 55 106 69 C111 82 121 90 133 91 C129 93 124 95 119 95 C103 95 90 87 83 74 C77 64 76 54 80 46 Z"/>
+          <path class="scene-pants motion-pec-legs" d="M77 163 C89 158 110 157 124 164 L141 218 H111 L100 181 L93 218 H62 Z"/>
+          <path class="scene-line motion-pec-legs" d="M77 163 C89 158 110 157 124 164 L141 218 M111 218 L100 181 L93 218 M62 218 L77 163"/>
+          <path class="scene-shirt motion-pec-torso" d="M70 91 C83 78 104 75 123 82 C140 89 148 108 146 134 C144 149 137 160 124 166 C107 171 84 168 72 158 C66 137 64 111 70 91 Z"/>
+          <path class="scene-shirt-light motion-pec-torso" d="M70 91 C81 81 93 78 104 79 C95 103 94 137 101 167 C89 166 79 163 72 158 C66 137 64 111 70 91 Z" opacity=".55"/>
+          <path class="scene-line motion-pec-torso" d="M70 91 C83 78 104 75 123 82 C140 89 148 108 146 134 C144 149 137 160 124 166 C107 171 84 168 72 158 C66 137 64 111 70 91 Z"/>
+          <path class="scene-detail motion-pec-torso" d="M75 105 C94 115 125 115 141 104 M70 129 C94 139 126 139 145 127 M74 151 C93 159 121 160 137 151"/>
+          <path class="scene-skin motion-pec-free-arm" d="M73 93 C62 105 57 122 58 141 C59 158 53 178 43 193 C39 199 40 205 46 208 C52 210 57 206 60 201 C72 182 77 162 76 143 C76 127 82 117 90 108 Z"/>
+          <path class="scene-line motion-pec-free-arm" d="M73 93 C62 105 57 122 58 141 C59 158 53 178 43 193 C39 199 40 205 46 208 C52 210 57 206 60 201 C72 182 77 162 76 143 C76 127 82 117 90 108"/>
+          <path class="scene-skin motion-pec-head" d="M80 45 C88 30 103 23 119 27 C136 31 147 46 145 64 C143 79 133 91 119 95 C103 95 90 87 83 74 C77 64 76 54 80 45 Z"/>
+          <path class="scene-skin-shadow motion-pec-head" d="M80 46 C87 32 99 25 112 26 C103 39 101 55 106 69 C111 82 121 90 133 91 C129 93 124 95 119 95 C103 95 90 87 83 74 C77 64 76 54 80 46 Z"/>
           <g class="ambient-hair"><path class="scene-hair" d="M78 53 C75 36 89 22 108 19 C128 17 145 30 149 49 C140 39 130 36 119 36 C107 40 96 37 87 31 C87 40 84 48 78 53 Z"/><path class="scene-hair" d="M82 42 C72 55 73 76 83 88 C75 82 71 70 73 59 C74 51 77 46 82 42 Z"/></g>
-          <path class="scene-line" d="M80 45 C88 30 103 23 119 27 C136 31 147 46 145 64 C143 79 133 91 119 95 C103 95 90 87 83 74 C77 64 76 54 80 45 Z"/>
-          <path class="scene-detail" d="M124 48 C130 47 135 49 139 53 M132 59 C137 60 140 62 143 65 M128 76 C133 78 138 76 141 72"/><circle cx="134" cy="53" r="1.6" fill="#465047"/><ellipse class="scene-cheek" cx="135" cy="68" rx="7" ry="4"/>
+          <path class="scene-line motion-pec-head" d="M80 45 C88 30 103 23 119 27 C136 31 147 46 145 64 C143 79 133 91 119 95 C103 95 90 87 83 74 C77 64 76 54 80 45 Z"/>
+          <path class="scene-detail motion-pec-head" d="M124 48 C130 47 135 49 139 53 M132 59 C137 60 140 62 143 65 M128 76 C133 78 138 76 141 72"/><circle class="motion-pec-head" cx="134" cy="53" r="1.6" fill="#465047"/><ellipse class="scene-cheek motion-pec-head" cx="135" cy="68" rx="7" ry="4"/>
         </g>
-        <path class="scene-motion" d="M101 199 C82 198 65 192 51 182 M59 190 L50 182 L62 181"/>
+        <path class="scene-motion guide-pec" d="M101 199 C82 198 65 192 51 182 M59 190 L50 182 L62 181"/>
       </svg>`,
 
-      chinTuckNod: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      chinTuckNod: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">${handDrawnDefs}
         <path class="scene-sky" d="M17 63 C31 24 74 11 118 16 C173 21 216 53 221 105 C226 159 192 211 130 222 C77 232 29 204 18 160 C9 125 5 91 17 63 Z"/>
         <path class="scene-white" d="M35 40 H107 V113 H35 Z" opacity=".8"/><path class="scene-wood" d="M31 36 H111 V43 H31 Z M104 36 H111 V118 H104 Z"/>
         <g class="ambient-cloud"><ellipse class="scene-sky-deep" cx="64" cy="68" rx="23" ry="8" opacity=".55"/><ellipse class="scene-sky-deep" cx="82" cy="64" rx="14" ry="10" opacity=".55"/></g>
@@ -2127,12 +2484,12 @@
           <g class="ambient-hair"><path class="scene-hair" d="M43 136 C39 118 54 99 74 95 C95 91 116 104 122 122 C111 114 100 112 89 113 C76 118 62 115 52 107 C52 118 49 128 43 136 Z"/><path class="scene-hair" d="M49 116 C38 128 39 149 49 160 C40 155 36 145 37 136 C38 127 42 121 49 116 Z"/></g>
           <path class="scene-line" d="M45 127 C54 108 73 99 92 102 C111 105 123 121 121 139 C119 155 108 168 92 172 C75 174 58 165 49 151 C43 142 41 134 45 127 Z"/>
           <path class="scene-detail" d="M99 123 C105 122 110 124 114 128 M109 136 C115 137 118 140 119 143 M105 153 C110 155 115 153 118 150"/><circle cx="108" cy="128" r="1.5" fill="#465047"/><ellipse class="scene-cheek" cx="111" cy="145" rx="7" ry="4"/>
-          <path class="scene-skin" d="M101 168 C108 172 116 174 126 175 L126 181 L94 178 Z"/>
         </g>
-        <path class="scene-motion" d="M75 188 C73 178 74 169 78 160 M72 167 L79 159 L82 169"/>
+        <g class="motion-secondary-nod"><path class="scene-skin" d="M101 168 C108 172 116 174 126 175 L126 181 L94 178 Z"/></g>
+        <path class="scene-motion guide-nod" d="M75 188 C73 178 74 169 78 160 M72 167 L79 159 L82 169"/>
       </svg>`,
 
-      wallAngels: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      wallAngels: `<svg viewBox="0 0 240 240" aria-hidden="true" focusable="false">${handDrawnDefs}
         <path class="scene-cream" d="M16 22 C45 9 92 13 120 17 C164 10 206 21 222 47 V220 H17 Z"/>
         <path class="scene-sky-deep" d="M22 34 H218 V211 H22 Z" opacity=".3"/>
         <path class="scene-detail" d="M22 75 H218 M22 117 H218 M22 159 H218 M22 201 H218" opacity=".18"/>
@@ -2140,6 +2497,7 @@
         <g class="ambient-leaf-left"><path class="scene-line" d="M27 207 C34 181 44 157 58 139"/><ellipse class="scene-leaf" cx="36" cy="181" rx="11" ry="21" transform="rotate(-31 36 181)"/><ellipse class="scene-leaf-dark" cx="53" cy="152" rx="10" ry="18" transform="rotate(38 53 152)"/></g>
         <g class="ambient-leaf-right"><path class="scene-line" d="M214 207 C205 184 195 165 182 149"/><ellipse class="scene-leaf" cx="204" cy="184" rx="11" ry="20" transform="rotate(33 204 184)"/><ellipse class="scene-leaf-dark" cx="187" cy="160" rx="10" ry="18" transform="rotate(-35 187 160)"/></g>
         <ellipse class="scene-shadow" cx="121" cy="216" rx="75" ry="8"/>
+        <g class="motion-secondary-angel">
         <path class="scene-pants" d="M92 167 H151 L160 218 H83 Z"/><path class="scene-line" d="M92 167 H151 L160 218 M83 218 L92 167 M121 174 L121 218"/>
         <path class="scene-shirt" d="M86 93 C97 81 109 77 121 77 C135 77 147 82 157 94 L159 168 C149 181 94 181 83 168 Z"/>
         <path class="scene-shirt-light" d="M86 93 C95 84 104 80 112 79 C103 103 102 140 108 176 C97 175 88 172 83 168 Z" opacity=".55"/>
@@ -2150,23 +2508,28 @@
         <g class="ambient-hair"><path class="scene-hair" d="M93 53 C90 37 102 22 120 18 C140 15 156 28 159 46 C151 38 141 34 132 35 C120 39 109 36 101 30 C101 39 98 47 93 53 Z"/><path class="scene-hair" d="M98 37 C89 49 90 68 98 78 C90 72 87 62 89 53 C90 46 93 41 98 37 Z"/></g>
         <path class="scene-line" d="M95 45 C101 29 114 22 128 25 C144 28 154 41 152 57 C150 71 141 81 127 85 C113 85 101 77 96 66 C92 59 92 51 95 45 Z"/>
         <path class="scene-detail" d="M103 58 C113 65 137 66 146 57 M105 69 C115 76 135 76 144 68"/>
+        </g>
         <g class="motion-angel-left">
           <path class="scene-shirt" d="M90 96 C75 94 63 101 56 112 L42 134 C38 141 29 142 24 136 C20 131 22 125 26 119 L45 90 C55 75 72 68 91 73 Z"/>
           <path class="scene-shirt-light" d="M88 96 C76 94 67 99 60 107 C55 114 49 124 43 133 C39 138 34 140 29 138 C39 124 47 106 52 93 C58 80 72 73 91 74 Z" opacity=".55"/>
           <path class="scene-line" d="M90 96 C75 94 63 101 56 112 L42 134 C38 141 29 142 24 136 C20 131 22 125 26 119 L45 90 C55 75 72 68 91 73"/>
-          <path class="scene-skin" d="M25 120 L25 78 C25 69 30 64 36 65 C42 66 45 72 44 81 L43 134 Z"/>
-          <path class="scene-line" d="M25 120 L25 78 C25 69 30 64 36 65 C42 66 45 72 44 81 L43 134"/>
-          <path class="scene-detail" d="M31 75 H42 M31 84 H43 M31 93 H43"/>
+          <g class="motion-angel-forearm-left">
+            <path class="scene-skin" d="M25 120 L25 78 C25 69 30 64 36 65 C42 66 45 72 44 81 L43 134 Z"/>
+            <path class="scene-line" d="M25 120 L25 78 C25 69 30 64 36 65 C42 66 45 72 44 81 L43 134"/>
+            <path class="scene-detail" d="M31 75 H42 M31 84 H43 M31 93 H43"/>
+          </g>
         </g>
         <g class="motion-angel-right">
           <path class="scene-shirt" d="M153 96 C168 94 180 101 187 112 L201 134 C205 141 214 142 219 136 C223 131 221 125 217 119 L198 90 C188 75 171 68 152 73 Z"/>
           <path class="scene-shirt-light" d="M155 96 C167 94 176 99 183 107 C188 114 194 124 200 133 C204 138 209 140 214 138 C204 124 196 106 191 93 C185 80 171 73 152 74 Z" opacity=".55"/>
           <path class="scene-line" d="M153 96 C168 94 180 101 187 112 L201 134 C205 141 214 142 219 136 C223 131 221 125 217 119 L198 90 C188 75 171 68 152 73"/>
-          <path class="scene-skin" d="M218 120 L218 78 C218 69 213 64 207 65 C201 66 198 72 199 81 L200 134 Z"/>
-          <path class="scene-line" d="M218 120 L218 78 C218 69 213 64 207 65 C201 66 198 72 199 81 L200 134"/>
-          <path class="scene-detail" d="M212 75 H201 M212 84 H200 M212 93 H200"/>
+          <g class="motion-angel-forearm-right">
+            <path class="scene-skin" d="M218 120 L218 78 C218 69 213 64 207 65 C201 66 198 72 199 81 L200 134 Z"/>
+            <path class="scene-line" d="M218 120 L218 78 C218 69 213 64 207 65 C201 66 198 72 199 81 L200 134"/>
+            <path class="scene-detail" d="M212 75 H201 M212 84 H200 M212 93 H200"/>
+          </g>
         </g>
-        <path class="scene-motion" d="M15 110 C11 80 19 51 37 34 M27 37 L38 32 L36 44 M228 110 C232 80 224 51 206 34 M216 37 L205 32 L207 44"/>
+        <path class="scene-motion guide-angel" d="M15 110 C11 80 19 51 37 34 M27 37 L38 32 L36 44 M228 110 C232 80 224 51 206 34 M216 37 L205 32 L207 44"/>
       </svg>`
     };
 
@@ -2181,6 +2544,7 @@
         hold: 5,
         rest: 3,
         sides: 1,
+        video: "videos/chin-tucks.mp4",
         illustration: "chinTucks"
       },
       {
@@ -2191,6 +2555,7 @@
         reps: 5,
         sides: 2,
         sideNames: ["CLOCKWISE", "COUNTER-CLOCKWISE"],
+        video: "videos/neck-circles.mp4",
         illustration: "neckCircles"
       },
       {
@@ -2201,6 +2566,7 @@
         duration: 40,
         sides: 2,
         sideNames: ["LEFT SIDE", "RIGHT SIDE"],
+        video: "videos/upper-trap.mp4",
         illustration: "upperTrap"
       },
       {
@@ -2211,6 +2577,7 @@
         duration: 40,
         sides: 2,
         sideNames: ["LEFT SIDE", "RIGHT SIDE"],
+        video: "videos/levator-scap.mp4",
         illustration: "levatorScap"
       },
       {
@@ -2221,6 +2588,7 @@
         duration: 40,
         sides: 2,
         sideNames: ["LEFT ARM", "RIGHT ARM"],
+        video: "videos/doorway-pec.mp4",
         illustration: "doorwayPec"
       },
 
@@ -2233,6 +2601,7 @@
         hold: 8,
         rest: 4,
         sides: 1,
+        video: "videos/chin-tuck-nod.mp4",
         illustration: "chinTuckNod"
       },
 
@@ -2243,6 +2612,7 @@
         type: "reps",
         reps: 12,
         sides: 1,
+        video: "videos/wall-angels.mp4",
         illustration: "wallAngels"
       },
 
@@ -2361,7 +2731,22 @@
       $('headerTitle').textContent = ex.part;
       $('exerciseName').textContent = ex.name;
       $('instructions').textContent = ex.instructions;
-      $('illustration').innerHTML = illustrations[ex.illustration] || '';
+      const illustrationEl = $('illustration');
+      if (ex.video) {
+        illustrationEl.innerHTML = '';
+        const vid = document.createElement('video');
+        vid.src = ex.video;
+        vid.muted = true;
+        vid.loop = true;
+        vid.autoplay = true;
+        vid.playsInline = true;
+        vid.setAttribute('playsinline', '');
+        vid.onerror = () => { illustrationEl.innerHTML = illustrations[ex.illustration] || ''; };
+        illustrationEl.appendChild(vid);
+        vid.play().catch(() => {});
+      } else {
+        illustrationEl.innerHTML = illustrations[ex.illustration] || '';
+      }
 
       // Side label
       const sideLabel = $('sideLabel');
